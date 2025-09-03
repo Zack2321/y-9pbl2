@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - ASH Cybersecurity</title>
+  <link rel="icon" href="ASH_LOGO.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap');
+    
+    :root {
+      --neon-cyan: #0ff;
+      --neon-pink: #f0f;
+      --neon-purple: #9d00ff;
+      --deep-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+      --text-glow: 0 0 10px #0ff;
+      --pink-glow: 0 0 10px rgba(255, 0, 255, 0.7);
+    }
+    
+    body {
+      font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: white;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.05) 0%, transparent 20%);
+    }
+    
+    .navbar {
+            background: rgba(0, 0, 0, 0.9) !important;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            z-index: 1000;
+            padding: 0.3rem 0;
+            min-height: 60px;
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1.6rem;
+            color: var(--neon-cyan) !important;
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 255, 255, 0.5);
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+            position: relative;
+            padding: 0;
+            margin-right: 35px;
+            margin-left: 0;
+            white-space: nowrap;
+        }
+        
+        .navbar-brand:hover {
+            text-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.7);
+        }
+        
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .nav-link {
+            color: #fff !important;
+            margin: 0 6px;
+            position: relative;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 6px 4px !important;
+            white-space: nowrap;
+        }
+        
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            transition: 0.4s ease;
+            box-shadow: 0 0 8px var(--neon-cyan), 0 0 8px var(--neon-pink);
+            border-radius: 2px;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--neon-cyan) !important;
+            text-shadow: var(--text-glow);
+        }
+        
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        
+        .nav-item {
+            margin: 0 3px;
+        }
+    
+    .btn-neon {
+      border: 2px solid var(--neon-cyan);
+      background-color: transparent;
+      color: var(--neon-cyan);
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1.5px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+    }
+    
+    .btn-neon:hover {
+      background-color: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 30px var(--neon-cyan), 0 0 60px rgba(0, 255, 255, 0.6);
+      transform: translateY(-3px);
+    }
+    
+    .btn-neon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+      transition: 0.6s;
+    }
+    
+    .btn-neon:hover::before {
+      left: 100%;
+    }
+    
+    /* About Us Content Styles */
+    .about-section {
+      padding: 120px 0 60px;
+      min-height: 100vh;
+    }
+    
+    .heading {
+      text-align: center;
+      font-size: 3.5rem;
+      margin: 0 0 2rem;
+      padding: 0;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 15px var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .team-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    
+    .team-member {
+      background: rgba(15, 25, 35, 0.8);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 15px;
+      padding: 25px;
+      width: 280px;
+      text-align: center;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+      border-color: var(--neon-cyan);
+    }
+    
+    .member-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      margin: 0 auto 20px;
+    }
+    
+    .member-name {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+    
+    .member-role {
+      color: var(--neon-pink);
+      font-weight: 600;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    }
+    
+    .member-desc {
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+    
+    /* Footer Styles */
+   
+  footer .container-fluid {
+  background-color: #060607;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.footer-col {
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col h4 {
+  color: white;
+  margin-bottom: 25px;
+  font-size: 22px;
+  position: relative;
+  font-family: 'Ubuntu', sans-serif;
+  display: inline-block;
+}
+
+.footer-col h4::before {
+  content: '';
+  width: 70px;
+  height: 2px;
+  position: absolute;
+  background-color: #2a5da5;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer-col ul li {
+  padding: 10px 0;
+}
+
+.footer-col ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+.footer-col ul li a:hover {
+  opacity: 1;
+  color: var(--neon-cyan);
+}
+
+.footer-hr {
+  width: 80%;
+  margin: 20px auto;
+  border-top: 2px solid #2a5da5;
+  opacity: 0.6;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.social-icons a {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+.fa-facebook {
+  background: #3b5998;
+}
+
+.fa-youtube {
+  background: #ff0000;
+}
+
+.fa-google {
+  background: #db4a39;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.col {
+  color: white;
+  margin-top: 10px;
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .footer-col {
+    width: 30%;
+    max-width: 250px;
+  }
+  
+  .footer-row {
+    justify-content: space-around;
+  }
+}
+    .col{
+      color: white;
+    }
+    
+    @media (min-width: 768px) {
+      .footer-col {
+        width: 30%;
+      }
+    }
+
+    .col {
+      color: white;
+    }
+    
+    @media (max-width: 768px) {
+      .heading {
+        font-size: 2.5rem;
+      }
+      
+      .team-member {
+        width: 100%;
+        max-width: 320px;
+      }
+      
+      .footer-col {
+        width: 100%;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .footer-col {
+        width: 30%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="ASH_LOGO.png" width="40px"></i>ASH</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cyberNavbar" aria-controls="cyberNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="background-color:#0ff;"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="cyberNavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <a class="nav-link" href="mcafee.html" >
+            AV softwares
+          </a>
+        <li class="nav-item"><a class="nav-link" href="about-us2 (1).html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact1 1.html">Contact Us</a></li>
+       
+      </ul>
+      
+
+      
+      <div id="authButtons">
+        <button class="btn btn-neon" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="bi bi-shield-check me-2"></i>Sign in</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">SECURE LOGIN</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" required>
+            <div class="invalid-feedback">Please enter a valid username (min 4 characters)</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required>
+            <div class="invalid-feedback">Password must be at least 6 characters</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="remember Me">Remember me</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Login</button>
+          </div>
+          <div id="loginError" class="login-error">
+            Invalid credentials. Please try again.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">New user? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#registerModal" data-b极 s-dismiss="modal">Register here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">SECURE REGISTRATION</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="registerForm">
+          <div class="mb-3">
+            <label for="regUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="regUsername" required>
+            <div class="invalid-feedback">Username must be 4-20 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" required>
+            <div class="invalid-feedback">Please enter a valid email</div>
+          </div>
+          <div class="mb-3">
+            <label for="regPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="regPassword" required>
+            <div class="invalid-feedback">Password must be at least 8 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regConfirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="regConfirmPassword" required>
+            <div class="invalid-feedback">Passwords must match</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+            <label class="form-check-label" for="termsCheck">I agree to the <a href="#" style="color: var(--neon-cyan);">Terms & Conditions</a></label>
+            <div class="invalid-feedback">You must agree to the terms</div>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Register</button>
+          </div>
+          <div id="registerError" class="register-error">
+            Registration error. Please try again.
+          </div>
+          <div id="registerSuccess" class="register-success">
+            Registration successful! You can now login.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">Already have an account? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Login here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="about-section">
+  <div class="container">
+    <h2 class="heading">About Our Team</h2>
+    
+    <div class="team-container">
+      <div class="team-member">
+         <img src="Screenshot 2025-08-28 191717.png" alt="Aung Zayar Phyo" class="member-img">
+        <h3 class="member-name">Aung Zayar Phyo</h3>
+        <p class="member-role">Leader - Main Coder</p>
+        <p class="member-desc">Leads development efforts with expertise in cybersecurity algorithms and system architecture.</p>
+      </div>
+       <div class="team-member">
+        <img src="Screenshot 2025-08-28 191726.png" alt="Shin Moe Nwe" class="member-img">
+        <h3 class="member-name">Shin Moe Nwe</h3>
+        <p class="member-role">Co-coder</p>
+        <p class="member-desc">Specializes in user authentication systems and security education content development.</p>
+      </div>
+      
+      <div class="team-member">
+               <img src="Screenshot 2025-08-28 191720.png" alt="Sweety" class="member-img">
+        <h3 class="member-name">Sweety</h3>
+        <p class="member-role">Co-coder</p>
+        <p class="member-desc">Specializes in front-end development and user experience design with a focus on security interfaces.</p>
+      </div>
+      
+      <div class="team-member">
+        <img src="hsu.jpg" alt="Hsu Latt Haymhan Oo" class="member-img">
+        <h3 class="member-name">Hsu Latt Haymhan Oo</h3>
+        <p class="member-role">Co-coder</p>
+        <p class="member-desc">Focuses on threat detection systems and vulnerability assessment protocols.</p>
+      </div>
+      
+      <div class="team-member">
+        <img src="Screenshot 2025-08-28 191737.png" alt="Htet Waiyan Lynn" class="member-img">
+        <h3 class="member-name">Htet Waiyan Lynn</h3>
+        <p class="member-role">Co-coder</p>
+        <p class="member-desc">Expert in encryption technologies and secure data transmission protocols.</p>
+      </div>
+      
+     
+    </div>
+  </div>
+</section>
+
+<div class="container mt-5 pt-5" style="text-decoration: none;">
+    <ul class="items row text-center">
+      <li class="col-md-3"></li>
+  
+      <li class="col-md-3 d-flex flex-column align-items-center">
+          <h5>
+              <img src="ruby_spinning.gif" width="37px"> Driving Question 
+              <img src="ruby_spinning.gif" width="37px">
+          </h5>
+          <p style="text-align: justify;">How can we create a secure and informative website that guides people on lifestyle and career paths by providing safety tips and daily routine insights? </p>
+      </li>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class="col-md-3 d-flex flex-column align-items-center">
+          <h5>
+              <img src="ruby_spinning.gif" width="37px"> Essential Question 
+              <img src="ruby_spinning.gif" width="37px">
+          </h5>
+          <p style="text-align: justify;">How can we raise awareness about online risks and dangers to help people stay safe online by providing useful safety tips and information? </p>
+      </li>
+  
+      <li class="col-md-3"></li>
+  </ul>
+  
+</div>
+
+
+<footer id="contact">
+  <div class="container-fluid">
+    <div class="footer-row">
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="about-us2 (1).html">About Us</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>News</h4>
+        <ul>
+          <li><a href="#tips">Security Tips</a></li>
+          <li><a href="cyberaware.html">Cyber Awareness</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#support">Support</a></li>
+          <li><a href="reference.html">Reference</a></li>
+          <li><a href="contact1 1.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-hr"/>
+    <div class="row text-center">
+      <div class="social-icons">
+  <a href="https://facebook.com" target="_blank" class="fa fa-facebook"></a>
+  <a href="https://www.youtube.com/watch?v=X9Htg8V3eik&pp=ygWLAUhvdyBjYW4gd2UgcmFpc2UgYXdhcmVuZXNzIGFib3V0IG9ubGluZSByaXNrcyBhbmQgZGFuZ2VycyB0byBoZWxwIHBlb3BsZSBzdGF5IHNhZmUgb25saW5lIGJ5IHByb3ZpZGluZyB1c2VmdWwgc2FmZXR5IHRpcHMgYW5kIGluZm9ybWF0aW9uPyA%3D" target="_blank" class="fa fa-youtube"></a>
+  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0747563215000606" target="_blank" class="fa fa-google"></a>
+  <a href="" target="_blank" class="fa fa-twitter"></a>
+</div>
+      <div class="col">
+        <p>&copy; Copyright 2025-2026. All rights reserved. Developed by ASH.</p>
+      </div>
+    </div>  
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Simple initialization to ensure everything works
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('ASH Cybersecurity About Us page loaded successfully');
+    
+    // Add padding to the top of the about section to account for fixed navbar
+    const aboutSection = document.querySelector('.about-section');
+    aboutSection.style.paddingTop = '100px';
+  });
+</script>
+</body>
+</html>

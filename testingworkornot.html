@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Device Scanner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --primary: #0d6efd;
+            --danger: #dc3545;
+            --success: #198754;
+            --warning: #ffc107;
+            --text: #f8f9fa;
+            --muted: #6c757d;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+        
+        .security-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .header p {
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-control {
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            color: var(--text);
+            padding: 12px;
+        }
+        
+        .form-control:focus {
+            background-color: #2d2d2d;
+            border-color: var(--primary);
+            color: var(--text);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        
+        .btn-scan {
+            background-color: var(--primary);
+            border: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .btn-scan:hover {
+            background-color: #0b5ed7;
+            transform: translateY(-2px);
+        }
+        
+        .result-container {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .device-list {
+            margin-top: 15px;
+        }
+        
+        .device-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .device-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .device-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: var(--primary);
+            width: 40px;
+            text-align: center;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .spinner {
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .progress {
+            height: 8px;
+            margin-bottom: 20px;
+            background-color: #2d2d2d;
+        }
+        
+        .last-active {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        
+        .location {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        
+        .device-info {
+            flex-grow: 1;
+        }
+        
+        .device-actions {
+            margin-left: 15px;
+        }
+        
+        .security-status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(25, 135, 84, 0.2);
+            border-left: 5px solid var(--success);
+        }
+        
+        .unknown-device {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left: 5px solid var(--danger);
+        }
+        
+        .warning-status {
+            background-color: rgba(255, 193, 7, 0.2);
+            border-left: 5px solid var(--warning);
+        }
+        
+        .accuracy-note {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+        
+        /* New styles for additional features */
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            flex: 1;
+            min-width: 200px;
+            margin-right: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-card:last-child {
+            margin-right: 0;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        
+        .tab-content {
+            margin-top: 20px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--muted);
+            border: none;
+            padding: 10px 15px;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            background-color: transparent;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .security-tips {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .tip-item {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .tip-icon {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--primary);
+        }
+        
+        .history-chart {
+            height: 200px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            background-color: var(--primary);
+            border-radius: 3px 3px 0 0;
+            transition: height 0.5s;
+        }
+        
+        .chart-label {
+            position: absolute;
+            bottom: -25px;
+            text-align: center;
+            width: 30px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-action {
+            flex: 1;
+        }
+        
+        .last-scan {
+            font-size: 0.9rem;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+        
+        .btn-notification {
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-container {
+                flex-direction: column;
+            }
+            
+            .stat-card {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt me-2"></i>Gmail Device Scanner</h1>
+            <p>Check which devices are currently logged into your Gmail account and enhance your security</p>
+        </div>
+        
+        <div class="security-card">
+            <form id="securityForm">
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">Enter your Gmail address</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="email" class="form-control" id="emailInput" placeholder="yourname@gmail.com" required>
+                    </div>
+                    <div class="form-text text-muted">We'll simulate a device scan based on your email</div>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="advancedScan">
+                    <label class="form-check-label" for="advancedScan">Enable advanced security scan</label>
+                </div>
+                <button type="submit" class="btn btn-scan">
+                    <i class="fas fa-search me-2"></i>SCAN DEVICES
+                </button>
+            </form>
+            
+            <div class="progress mt-4" id="progressBar" style="display: none;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+            </div>
+            
+            <div class="loading" id="loadingIndicator" style="display: none;">
+                <div class="spinner-border text-primary spinner" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p id="loadingText">Connecting to Gmail security services...</p>
+            </div>
+        </div>
+        
+        <div class="result-container" id="resultContainer">
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalDevices">0</div>
+                    <div class="stat-label">Total Devices</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="activeNow">0</div>
+                    <div class="stat-label">Active Now</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="suspiciousCount">0</div>
+                    <div class="stat-label">Suspicious Devices</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="locationsCount">0</div>
+                    <div class="stat-label">Different Locations</div>
+                </div>
+            </div>
+            
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="devices-tab" data-bs-toggle="tab" data-bs-target="#devices" type="button" role="tab">Devices</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="activity-tab" data-bs-toggle="tab" data-bs-target="#activity" type="button" role="tab">Activity History</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link btn-notification" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">
+                        Security Tips
+                        <span class="notification-badge" id="tipsCount">3</span>
+                    </button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="devices" role="tabpanel">
+                    <div class="security-status" id="securityStatus">
+                        <h4><i class="fas fa-check-circle me-2"></i>Account Security Status</h4>
+                        <p id="statusText">Your Gmail account appears to be secure</p>
+                    </div>
+                    
+                    <h4 class="mt-4">Active Devices</h4>
+                    <p class="text-muted">These devices are currently logged into your Gmail account</p>
+                    
+                    <div class="device-list" id="deviceList">
+                        <!-- Devices will be inserted here -->
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-outline-danger btn-action" id="signOutAllBtn">
+                            <i class="fas fa-sign-out-alt me-2"></i>Sign Out All Devices
+                        </button>
+                        <button class="btn btn-outline-primary btn-action" id="refreshScanBtn">
+                            <i class="fas fa-sync-alt me-2"></i>Refresh Scan
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="activity" role="tabpanel">
+                    <h4 class="mt-4">Login Activity History</h4>
+                    <p class="text-muted">Historical view of account access patterns</p>
+                    
+                    <div class="history-chart" id="historyChart">
+                        <!-- Chart will be generated here -->
+                    </div>
+                    
+                    <div class="security-tips mt-4">
+                        <h5><i class="fas fa-history me-2"></i>Recent Login Activity</h5>
+                        <div id="recentActivity">
+                            <!-- Recent activity will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="security" role="tabpanel">
+                    <h4 class="mt-4">Security Recommendations</h4>
+                    <p class="text-muted">Improve your account security with these tips</p>
+                    
+                    <div class="security-tips">
+                        <div class="tip-item">
+                            <i class="fas fa-key tip-icon"></i>
+                            <h5>Enable 2-Step Verification</h5>
+                            <p>Add an extra layer of security to your account by requiring a verification code in addition to your password.</p>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <i class="fas fa-mobile-alt tip-icon"></i>
+                            <h5>Use App Passwords</h5>
+                            <p>For applications that don't support 2-Step Verification, generate unique app passwords instead of using your main password.</p>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <i class="fas fa-shield-alt tip-icon"></i>
+                            <h5>Review Account Permissions</h5>
+                            <p>Regularly check and remove access for third-party apps that you no longer use or trust.</p>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <i class="fas fa-bell tip-icon"></i>
+                            <h5>Set Up Alert Notifications</h5>
+                            <p>Receive alerts when suspicious activity is detected on your account.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary btn-action">
+                            <i class="fas fa-user-shield me-2"></i>Google Security Checkup
+                        </button>
+                        <button class="btn btn-outline-primary btn-action">
+                            <i class="fas fa-cog me-2"></i>Account Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accuracy-note">
+                <p><strong>Note:</strong> This is a simulation showing how a Gmail device scanner might work. In a real implementation, this would connect to Google's security API to retrieve actual device information.</p>
+                <p class="last-scan" id="lastScanTime"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('securityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            startScan();
+        });
+        
+        document.getElementById('refreshScanBtn').addEventListener('click', function() {
+            startScan();
+        });
+        
+        document.getElementById('signOutAllBtn').addEventListener('click', function() {
+            if (confirm('Are you sure you want to sign out all devices? You will need to sign in again on all your devices.')) {
+                // Simulate signing out all devices
+                const btn = this;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Signing Out...';
+                btn.disabled = true;
+                
+                setTimeout(function() {
+                    alert('All devices have been signed out successfully.');
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    // Refresh the scan
+                    startScan();
+                }, 2000);
+            }
+        });
+        
+        function startScan() {
+            // Get the email value
+            const email = document.getElementById('emailInput').value;
+            
+            // Validate it's a Gmail address
+            if (!email.includes('@gmail.com') && !email.includes('@googlemail.com')) {
+                alert('Please enter a valid Gmail address (ending with @gmail.com or @googlemail.com)');
+                return;
+            }
+            
+            // Show progress and loading
+            document.getElementById('progressBar').style.display = 'block';
+            document.getElementById('loadingIndicator').style.display = 'block';
+            
+            // Hide any previous results
+            document.getElementById('resultContainer').style.display = 'none';
+            
+            // Update loading text
+            const loadingStages = [
+                "Connecting to Gmail security services...",
+                "Authenticating with Google API...",
+                "Retrieving device information...",
+                "Analyzing login patterns...",
+                "Finalizing security report..."
+            ];
+            
+            let progress = 0;
+            let currentStage = 0;
+            
+            const progressInterval = setInterval(function() {
+                progress += 2;
+                document.querySelector('.progress-bar').style.width = progress + '%';
+                
+                // Update loading text at certain intervals
+                if (progress % 20 === 0 && currentStage < loadingStages.length - 1) {
+                    currentStage++;
+                    document.getElementById('loadingText').textContent = loadingStages[currentStage];
+                }
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    // Hide loading indicator
+                    document.getElementById('loadingIndicator').style.display = 'none';
+                    document.getElementById('progressBar').style.display = 'none';
+                    
+                    // Show results
+                    showDevices(email);
+                    document.getElementById('resultContainer').style.display = 'block';
+                    
+                    // Update last scan time
+                    const now = new Date();
+                    document.getElementById('lastScanTime').textContent = 'Last scanned: ' + now.toLocaleString();
+                    
+                    // Scroll to results
+                    document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        }
+        
+        function showDevices(email) {
+            // Extract username part for more personalized results
+            const username = email.split('@')[0];
+            
+            // Generate device list based on email for consistency
+            const devices = generateDevices(username);
+            
+            // Update stats
+            document.getElementById('totalDevices').textContent = devices.length;
+            document.getElementById('activeNow').textContent = devices.filter(d => d.time.includes('now') || d.time.includes('minutes')).length;
+            document.getElementById('suspiciousCount').textContent = devices.filter(d => !d.trusted).length;
+            
+            // Count unique locations
+            const uniqueLocations = new Set(devices.map(d => d.location));
+            document.getElementById('locationsCount').textContent = uniqueLocations.size;
+            
+            // Update security status
+            const hasUnknown = devices.some(device => !device.trusted);
+            const hasRecentForeign = devices.some(device => 
+                !device.trusted && device.location !== "Local Area" && 
+                (device.time.includes("minutes") || device.time.includes("hours"))
+            );
+            
+            const statusElement = document.getElementById('securityStatus');
+            const statusText = document.getElementById('statusText');
+            
+            if (hasRecentForeign) {
+                statusElement.className = 'security-status unknown-device';
+                statusElement.innerHTML = `
+                    <h4><i class="fas fa-exclamation-triangle me-2"></i>Security Alert!</h4>
+                    <p>We found recent suspicious activity from unrecognized locations</p>
+                `;
+            } else if (hasUnknown) {
+                statusElement.className = 'security-status warning-status';
+                statusElement.innerHTML = `
+                    <h4><i class="fas fa-exclamation-circle me-2"></i>Suspicious Activity Detected</h4>
+                    <p>We found unrecognized devices logged into your account</p>
+                `;
+            } else {
+                statusElement.className = 'security-status';
+                statusElement.innerHTML = `
+                    <h4><i class="fas fa-check-circle me-2"></i>Account Security Status: Secure</h4>
+                    <p>All devices are recognized and no suspicious activity detected</p>
+                `;
+            }
+            
+            // Generate device list HTML
+            let deviceHTML = '';
+            devices.forEach(device => {
+                deviceHTML += `
+                    <div class="device-item ${device.trusted ? '' : 'unknown-device'}">
+                        <div class="device-icon">
+                            <i class="fas ${getDeviceIcon(device.type)}"></i>
+                        </div>
+                        <div class="device-info">
+                            <h5>${device.name} ${!device.trusted ? '<span class="badge bg-danger ms-2">Unrecognized</span>' : ''}</h5>
+                            <p class="mb-1">${device.browser} · ${device.os}</p>
+                            <p class="location mb-1"><i class="fas fa-map-marker-alt me-1"></i> ${device.location}</p>
+                            <p class="last-active"><i class="fas fa-clock me-1"></i> Last active: ${device.time}</p>
+                            <p class="last-active">IP: ${device.ip}</p>
+                        </div>
+                        <div class="device-actions">
+                            ${!device.trusted ? '<button class="btn btn-sm btn-outline-danger" onclick="signOutDevice(this)">Sign Out</button>' : 
+                              '<button class="btn btn-sm btn-outline-secondary" onclick="renameDevice(this)">Rename</button>'}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('deviceList').innerHTML = deviceHTML;
+            
+            // Generate activity history chart
+            generateActivityChart();
+            
+            // Generate recent activity list
+            generateRecentActivity(devices);
+        }
+        
+        function generateDevices(username) {
+            // Base devices that most accounts will have
+            const baseDevices = [
+                {
+                    name: `${username}'s MacBook Pro`,
+                    type: 'laptop',
+                    browser: 'Chrome 114',
+                    os: 'macOS Ventura',
+                    location: 'Local Area',
+                    time: 'Active now',
+                    ip: '192.168.1.' + (Math.floor(Math.random() * 50) + 5),
+                    trusted: true
+                },
+                {
+                    name: `${username}'s iPhone`,
+                    type: 'phone',
+                    browser: 'Safari Mobile',
+                    os: 'iOS 16.5.1',
+                    location: 'Local Area',
+                    time: '15 minutes ago',
+                    ip: '192.168.1.' + (Math.floor(Math.random() * 50) + 5),
+                    trusted: true
+                }
+            ];
+            
+            // Additional devices based on username for demonstration
+            const additionalDevices = [];
+            
+            if (username.length < 5 || username.includes('123')) {
+                // Simple usernames often have more devices
+                additionalDevices.push(
+                    {
+                        name: 'Windows PC',
+                        type: 'desktop',
+                        browser: 'Firefox 115',
+                        os: 'Windows 11',
+                        location: 'Local Area',
+                        time: '2 hours ago',
+                        ip: '192.168.1.' + (Math.floor(Math.random() * 50) + 5),
+                        trusted: true
+                    }
+                );
+            }
+            
+            if (username.includes('admin') || username.includes('test')) {
+                // Admin/test accounts often have suspicious activity
+                additionalDevices.push(
+                    {
+                        name: 'Unknown Android Device',
+                        type: 'phone',
+                        browser: 'Chrome Mobile',
+                        os: 'Android 13',
+                        location: 'Beijing, China',
+                        time: '45 minutes ago',
+                        ip: '112.65.' + Math.floor(Math.random() * 255) + '.' + Math.floor(Math.random() * 255),
+                        trusted: false
+                    }
+                );
+            }
+            
+            if (username.includes('john') || username.includes('jane')) {
+                // Common names might have tablets
+                additionalDevices.push(
+                    {
+                        name: `${username}'s iPad`,
+                        type: 'tablet',
+                        browser: 'Safari',
+                        os: 'iPadOS 16',
+                        location: 'Local Area',
+                        time: 'Yesterday',
+                        ip: '192.168.1.' + (Math.floor(Math.random() * 50) + 5),
+                        trusted: true
+                    }
+                );
+            }
+            
+            if (username.includes('david') || username.length > 10) {
+                // Long usernames or specific names might have foreign logins
+                additionalDevices.push(
+                    {
+                        name: 'Unknown Windows Device',
+                        type: 'desktop',
+                        browser: 'Edge 114',
+                        os: 'Windows 10',
+                        location: 'Moscow, Russia',
+                        time: '3 days ago',
+                        ip: '95.165.' + Math.floor(Math.random() * 255) + '.' + Math.floor(Math.random() * 255),
+                        trusted: false
+                    }
+                );
+            }
+            
+            // Always include at least one foreign device for demonstration
+            if (additionalDevices.filter(d => !d.trusted).length === 0) {
+                additionalDevices.push(
+                    {
+                        name: 'Samsung Galaxy',
+                        type: 'phone',
+                        browser: 'Samsung Internet',
+                        os: 'Android 12',
+                        location: 'London, UK',
+                        time: '2 weeks ago',
+                        ip: '86.150.' + Math.floor(Math.random() * 255) + '.' + Math.floor(Math.random() * 255),
+                        trusted: Math.random() > 0.5 // Randomly trusted or not
+                    }
+                );
+            }
+            
+            return [...baseDevices, ...additionalDevices];
+        }
+        
+        function getDeviceIcon(type) {
+            switch(type) {
+                case 'phone': return 'fa-mobile-alt';
+                case 'tablet': return 'fa-tablet-alt';
+                case 'desktop': return 'fa-desktop';
+                case 'laptop': return 'fa-laptop';
+                default: return 'fa-device';
+            }
+        }
+        
+        function generateActivityChart() {
+            const chartContainer = document.getElementById('historyChart');
+            chartContainer.innerHTML = '';
+            
+            const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            const data = [];
+            
+            // Generate random data for the chart
+            for (let i = 0; i < 7; i++) {
+                data.push(Math.floor(Math.random() * 100) + 20);
+            }
+            
+            const maxValue = Math.max(...data);
+            const chartWidth = chartContainer.offsetWidth - 40;
+            const barWidth = (chartWidth / days.length) - 10;
+            
+            // Create bars for the chart
+            days.forEach((day, index) => {
+                const barHeight = (data[index] / maxValue) * 150;
+                const bar = document.createElement('div');
+                bar.className = 'chart-bar';
+                bar.style.height = barHeight + 'px';
+                bar.style.left = (index * (barWidth + 10)) + 20 + 'px';
+                
+                const label = document.createElement('div');
+                label.className = 'chart-label';
+                label.textContent = day;
+                label.style.left = (index * (barWidth + 10)) + 20 + 'px';
+                
+                chartContainer.appendChild(bar);
+                chartContainer.appendChild(label);
+            });
+        }
+        
+        function generateRecentActivity(devices) {
+            const activityContainer = document.getElementById('recentActivity');
+            let activityHTML = '';
+            
+            // Sort devices by time (most recent first)
+            const sortedDevices = [...devices].sort((a, b) => {
+                const timeValueA = getTimeValue(a.time);
+                const timeValueB = getTimeValue(b.time);
+                return timeValueB - timeValueA;
+            });
+            
+            // Show only the 5 most recent activities
+            sortedDevices.slice(0, 5).forEach(device => {
+                activityHTML += `
+                    <div class="tip-item">
+                        <i class="fas ${getDeviceIcon(device.type)} tip-icon"></i>
+                        <h5>${device.name}</h5>
+                        <p>${device.location} · ${device.time} · ${device.browser}</p>
+                    </div>
+                `;
+            });
+            
+            activityContainer.innerHTML = activityHTML;
+        }
+        
+        function getTimeValue(timeStr) {
+            if (timeStr.includes('now')) return 0;
+            if (timeStr.includes('minutes')) return parseInt(timeStr);
+            if (timeStr.includes('hours')) return parseInt(timeStr) * 60;
+            if (timeStr.includes('days')) return parseInt(timeStr) * 60 * 24;
+            return parseInt(timeStr) * 60 * 24 * 7; // weeks
+        }
+        
+        function signOutDevice(button) {
+            const deviceItem = button.closest('.device-item');
+            const deviceName = deviceItem.querySelector('h5').textContent;
+            
+            if (confirm(`Are you sure you want to sign out ${deviceName}?`)) {
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    deviceItem.style.opacity = '0.5';
+                    button.innerHTML = '<i class="fas fa-check"></i> Signed Out';
+                    setTimeout(() => {
+                        deviceItem.remove();
+                        // Update stats
+                        const totalDevices = document.getElementById('deviceList').children.length;
+                        document.getElementById('totalDevices').textContent = totalDevices;
+                        document.getElementById('suspiciousCount').textContent = 
+                            document.querySelectorAll('.unknown-device').length;
+                    }, 1000);
+                }, 1500);
+            }
+        }
+        
+        function renameDevice(button) {
+            const deviceItem = button.closest('.device-item');
+            const deviceNameElement = deviceItem.querySelector('h5');
+            const currentName = deviceNameElement.textContent.replace(' Unrecognized', '').trim();
+            
+            const newName = prompt('Enter a new name for this device:', currentName);
+            if (newName && newName !== currentName) {
+                deviceNameElement.textContent = newName;
+                
+                button.innerHTML = '<i class="fas fa-check"></i> Renamed';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    button.innerHTML = 'Rename';
+                    button.disabled = false;
+                }, 2000);
+            }
+        }
+        
+        // Initialize the page with some random tips count
+        document.getElementById('tipsCount').textContent = Math.floor(Math.random() * 5) + 1;
+    </script>
+</body>
+</html>

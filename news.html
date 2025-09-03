@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPulse - Cybersecurity News & Reviews</title>
+   <link rel="icon" href="ASH_LOGO.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap');
+        :root {
+            --neon-cyan: #0ff;
+            --neon-pink: #f0f;
+            --neon-purple: #9d00ff;
+            --deep-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+            --text-glow: 0 0 10px #0ff;
+            --pink-glow: 0 0 10px rgba(255, 0, 255, 0.7);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: white;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 255,  0.05) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.05) 0%, transparent 20%);
+            position: relative;
+            min-height: 100vh;
+            padding-top: 70px; /* Added padding to prevent content from being hidden under fixed navbar */
+        }
+        .navbar {
+            background: rgba(0, 0, 0, 0.95) !important;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            z-index: 1000;
+            padding: 0.5rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--neon-cyan) !important;
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 255, 255, 0.5);
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+            position: relative;
+            padding: 0;
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+        .navbar-brand:hover {
+            text-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.7);
+        }
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        .nav-item {
+            margin: 0 5px;
+        }
+        .nav-link {
+            color: #fff !important;
+            margin: 0 4px;
+            position: relative;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 6px 8px !important;
+            white-space: nowrap;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            transition: 0.4s ease;
+            box-shadow: 0 0 8px var(--neon-cyan), 0 0 8px var(--neon-pink);
+            border-radius: 2px;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link:hover {
+            color: var(--neon-cyan) !important;
+            text-shadow: var(--text-glow);
+        }
+        .btn-neon {
+            border: 2px solid var(--neon-cyan);
+            background-color: transparent;
+            color: var(--neon-cyan);
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+        }
+        h1 {
+            font-size: 3.5rem;
+            color: var(--neon-cyan);
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px var(--neon-cyan);
+            position: relative;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+        h1 span {
+            color: #fff;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+        }
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--neon-cyan);
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+        section {
+            margin-bottom: 60px;
+            position: relative;
+        }
+        h2 {
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            margin: 30px 0 20px;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), transparent);
+            border-radius: 3px;
+        }
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 40px 0;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-pink));
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        .timeline-box {
+            width: 45%;
+            background: rgba(0, 20, 30, 0.8);
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            margin: 40px 0;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            border: 1px solid var(--neon-cyan);
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .timeline-box::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .timeline-box.left {
+            left: 0;
+            text-align: right;
+        }
+        .timeline-box.left::after {
+            right: -30px;
+        }
+        .timeline-box.right {
+            left: 55%;
+            text-align: left;
+        }
+        .timeline-box.right::after {
+            left: -30px;
+        }
+        .timeline-box h3 {
+            color: var(--neon-cyan);
+            margin-top: 0;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+        .timeline-box p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .timeline-box strong {
+            color: var(--neon-pink);
+        }
+        .timeline-box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-box:hover {
+            background: rgba(0, 30, 50, 0.9);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            transform: translateY(-5px);
+        }
+        .highlight-button {
+            background-color: transparent;
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            padding: 12px 24px;
+            border-radius: 30px;
+            margin: 30px auto;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 2;
+            position: relative;
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        .highlight-button:hover {
+            background-color: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 25px var(--neon-cyan);
+        }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .news-card {
+            background: rgba(10, 20, 30, 0.8);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+        }
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+        }
+        .user-reviews {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .user-review {
+            background: rgba(10, 20, 30, 0.8);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--neon-cyan);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+        }
+        .user-review:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+        }
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .user-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background: rgba(0, 255, 255, 0.2);
+            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        .user-info {
+            flex: 1;
+        }
+        .user-name {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+        footer {
+            text-align: center;
+            margin-top: 70px;
+            padding: 40px;
+            border-top: 1px solid var(--neon-cyan);
+            color: #aaa;
+            position: relative;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animated {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        @media (max-width: 992px) {
+            .timeline-box {
+                width: 90%;
+                left: 5% !important;
+                text-align: left !important;
+            }
+            .timeline-box.left::after,
+            .timeline-box.right::after {
+                left: -30px;
+                right: auto;
+            }
+            .timeline-line {
+                left: 30px;
+            }
+        }
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 5px !important;
+            }
+            .btn-neon {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+            }
+            .news-grid,
+            .user-reviews {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+        }
+        .modal-content {
+            background-color: rgba(10, 20, 30, 0.95);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            color: white;
+        }
+        .modal-header {
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .btn-close {
+            filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);
+        }
+        .form-control {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: white;
+        }
+        .form-control:focus {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            color: white;
+        }
+        .form-label {
+            color: var(--neon-cyan);
+        }
+        .login-error, .register-error, .register-success {
+            color: #ff6b6b;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        .register-success {
+            color: var(--neon-cyan);
+        }
+        .is-invalid {
+            border-color: #ff6b6b !important;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5) !important;
+        }
+        .invalid-feedback {
+            color: #ff6b6b;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .terms-modal .modal-dialog {
+            max-width: 800px;
+        }
+        .terms-modal .modal-content {
+            max-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .terms-modal .modal-body {
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .terms-section {
+            margin-bottom: 25px;
+        }
+        .terms-section h3 {
+            color: var(--neon-cyan);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .terms-highlight {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 15px;
+            border-left: 3px solid var(--neon-cyan);
+            border-radius: 0 5px 5px 0;
+            margin: 15px 0;
+        }
+        .terms-list {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        .terms-list li {
+            margin-bottom: 8px;
+        }
+   
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="ASH_LOGO.png" width="40px"></i>ASH</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cyberNavbar" aria-controls="cyberNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="background-color:#0ff;"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="cyberNavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <a class="nav-link" href="mcafee.html" >
+            AV softwares
+          </a>
+        <li class="nav-item"><a class="nav-link" href="about-us2 (1).html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact1 1.html">Contact Us</a></li>
+      </ul>
+      
+      
+      
+      <div id="authButtons">
+        <button class="btn btn-neon" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="bi bi-shield-check me-2"></i>Sign in</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">SECURE LOGIN</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" required>
+            <div class="invalid-feedback">Please enter a valid username (min 4 characters)</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required>
+            <div class="invalid-feedback">Password must be at least 6 characters</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="remember Me">Remember me</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Login</button>
+          </div>
+          <div id="loginError" class="login-error">
+            Invalid credentials. Please try again.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">New user? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Register here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">SECURE REGISTRATION</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="registerForm">
+          <div class="mb-3">
+            <label for="regUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="regUsername" required>
+            <div class="invalid-feedback">Username must be 4-20 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" required>
+            <div class="invalid-feedback">Please enter a valid email</div>
+          </div>
+          <div class="mb-3">
+            <label for="regPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="regPassword" required>
+            <div class="invalid-feedback">Password must be at least 8 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regConfirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="regConfirmPassword" required>
+            <div class="invalid-feedback">Passwords must match</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+            <label class="form-check-label" for="termsCheck">I agree to the <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Policy</a></label>
+            <div class="invalid-feedback">You must agree to the terms</div>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Register</button>
+          </div>
+          <div id="registerError" class="register-error">
+            Registration error. Please try again.
+          </div>
+          <div id="registerSuccess" class="register-success">
+            Registration successful! You can now login.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">Already have an account? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Login here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade terms-modal" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Terms & Policies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="terms-section">
+          <h3>Terms and Conditions</h3>
+          <p>By accessing this website, you are agreeing to be bound by these website Terms and Conditions, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.</p>
+          
+          <div class="terms-highlight">
+            <p><strong>Important:</strong> If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
+          </div>
+        
+        <div class="terms-section">
+          <h3>Privacy Policy</h3>
+          <p>Your privacy is important to us. It is our policy to respect your privacy regarding any information we may collect from you across our website.</p>
+          
+          <h4>Information We Collect</h4>
+          <p>We only collect information about you if we have a reason to do so — for example, to provide our services, to communicate with you, or to make our services better.</p>
+          
+          <h4>How We Use Your Information</h4>
+          <p>We use the information we collect in various ways, including to:</p>
+          <ul class="terms-list">
+            <li>Provide, operate, and maintain our services</li>
+            <li>Improve, personalize, and expand our services</li>
+            <li>Understand and analyze how you use our services</li>
+            <li>Develop new products, services, features, and functionality</li>
+          </ul>
+        </div>
+        
+        
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1 class="animated">CYBER<span>PULSE</span></h1>
+                <p class="subtitle animated delay-1">Real-time Cybersecurity News & Community Reviews</p>
+            </div>
+        </header>
+        
+        
+        
+  
+        <section>
+            <h2>Cybersecurity Timeline 2025</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-box left">
+                    <h3>FEMA IT Breach</h3>
+                    <p><strong>Aug 29, 2025</strong></p>
+                    <p>U.S. Homeland Security Secretary Kristi Noem announced a FEMA IT breach. Around two dozen employees were fired. No U.S. citizens were directly affected, and no sensitive data was taken.</p>
+                </div>
+
+                <div class="timeline-box right">
+                    <h3>Malicious npm Package</h3>
+                    <p><strong>Apr 2025</strong></p>
+                    <p>Researchers found a fake npm package <strong>nodejs-smtp</strong> targeting crypto wallets like Atomic and Exodus. It was downloaded 347 times before removal.</p>
+                </div>
+
+                <div class="timeline-box left">
+                    <h3>Executive Cyber Course</h3>
+                    <p><strong>2025</strong></p>
+                    <p>A new program with Dr. Gerald Auger helps CISOs communicate risk effectively in boardrooms, boosting influence and investment in cybersecurity.</p>
+                </div>
+
+                <div class="timeline-box right">
+                    <h3>Small Weakness Chains</h3>
+                    <p><strong>2025</strong></p>
+                    <p>Experts warn cyberattacks often exploit chains of small flaws—like stolen credentials and outdated software—that together create major breaches.</p>
+                </div>
+
+                <div class="timeline-box left">
+                    <h3>SentinelOne Demand</h3>
+                    <p><strong>2025</strong></p>
+                    <p>SentinelOne sees rising AI-related threats. AI adoption expands attack surfaces, AI-powered attacks grow, and regulations tighten, fueling demand.</p>
+                </div>
+
+                <div class="timeline-box right">
+                    <h3>AI Boosting SOC</h3>
+                    <p><strong>2025</strong></p>
+                    <p>AI investments strengthen defenses by automating SOC processes, detecting threats earlier, and prioritizing high-risk issues for faster response.</p>
+                </div>
+
+                <button class="highlight-button">Cybersecurity Highlights 2025</button>
+            </div>
+        </section>
+        
+        <section class="animated">
+            <h2>Community Reviews</h2>
+            <p>See what our community is saying about cybersecurity products and practices:</p>
+            
+            <div class="user-reviews">
+                <div class="user-review">
+                    <div class="review-header">
+                        <div class="user-avatar">ES</div>
+                        <div class="user-info">
+
+                            <div class="user-name">Elena Sanchez</div>
+                            <div class="review-meta">
+                                <span class="review-count"><i class="fas fa-star"></i> 7 reviews</span>
+                                <span class="photo-count"><i class="fas fa-camera"></i> 2 photos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="review-date">2 months ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>This platform has been invaluable for staying updated on the latest threats. The community insights helped me implement better security practices at my organization.</p>
+                        <p>I particularly appreciate the real-time alerts and detailed analysis of emerging threats.</p>
+                    </div>
+                </div>
+                
+                <div class="user-review">
+                    <div class="review-header">
+                        <div class="user-avatar">DC</div>
+                        <div class="user-info">
+                        
+                            <div class="user-name">David Chen</div>
+                            <div class="review-meta">
+                                <span class="review-count"><i class="fas fa-star"></i> 12 reviews</span>
+                                <span class="photo-count"><i class="fas fa-camera"></i> 5 photos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="review-date">3 weeks ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>This cybersecurity service saved me from a potential phishing attack! I received an email that looked legitimate, but remembered the tips I learned here about checking sender addresses.</p>
+                        <p>The support team was incredibly helpful and walked me through the steps to secure my account. Highly recommend their services!</p>
+                    </div>
+                </div>
+                
+                <div class="user-review">
+                    <div class="review-header">
+                        <div class="user-avatar">MAL</div>
+                        <div class="user-info">
+                        
+                            <div class="user-name">Maung Aung Linn</div>
+                            <div class="review-meta">
+                                <span class="review-count"><i class="fas fa-star"></i> 16 reviews</span>
+                                <span class="photo-count"><i class="fas fa-camera"></i> 5 photos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    
+                        <span class="review-date">1  week ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>This cybersecurity service saved me from a potential phishing attack! I received an email that looked legitimate, but remembered the tips I learned here about checking sender addresses.</p>
+                        <p>The support team was incredibly helpful and walked me through the steps to secure my account. Highly recommend their services!</p>
+                    </div>
+                </div>
+
+                <div class="user-review">
+                    <div class="review-header">
+                        <div class="user-avatar">MR</div>
+                        <div class="user-info">
+                            <div class="user-name">Maya Rodriguez</div>
+                            <div class="review-meta">
+                                <span class="review-count"><i class="fas fa-star"></i> 9 reviews</span>
+                                <span class="photo-count"><i class="fas fa-camera"></i> 3 photos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="review-date">1 week ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>As a security analyst, I find the threat intelligence provided here extremely valuable. The detailed breakdowns of recent attacks help me better protect our network infrastructure.</p>
+                        <p>The community discussions are insightful and often provide practical solutions to complex security challenges.</p>
+                    </div>
+                </div>
+                
+                <div class="user-review">
+                    <div class="review-header">
+                        <div class="user-avatar">GR</div>
+                        <div class="user-info">
+                        
+                            <div class="user-name">Gold Royal</div>
+                            <div class="review-meta">
+                                <span class="review-count"><i class="fas fa-star"></i> 18 reviews</span>
+                                <span class="photo-count"><i class="fas fa-camera"></i> 2 photos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    
+                        <span class="review-date">2  week ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>I started in 2006 and still going. I've done it by changing careers within cybersecurity several times. From IAM security implementations, to appsec engineer, to netsec engineer, to mobile sec engineer, to mobile app sec product manager, to secops leader, to cloud IAM leader, to CISO 3x, to security educator/content creator.</p>
+                        <p>I wouldn't have stayed this long if I stayed in a single lane. But that's my journey. And I still care. …and I have burned out more than once, but find ways to get mentally strong and come back.</p>
+                    </div>
+                </div>
+                
+                <div class="user-review">
+                    <div class="review-header">
+                        <div class="user-avatar">TK</div>
+                        <div class="user-info">
+                            <div class="user-name">Tara Kim</div>
+                            <div class="review-meta">
+                                <span class="review-count"><i class="fas fa-star"></i> 14 reviews</span>
+                                <span class="photo-count"><i class="fas fa-camera"></i> 4 photos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="review-date">5 days ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>As a small business owner, cybersecurity was always a daunting topic until I found CyberPulse. The guides are written in plain English that anyone can understand.</p>
+                        <p>I implemented their recommended security practices and was able to prevent a ransomware attack that targeted similar businesses in my area. This platform is a lifesaver!</p>
+                    </div>
+                </div>
+                
+                <div class="user-review">
+                    <div class="review-header">
+                        <div class="user-avatar">JP</div>
+                        <div class="user-info">
+                            <div class="user-name">James Peterson</div>
+                            <div class="review-meta">
+                                <span class="review-count"><i class="fas fa-star"></i> 22 reviews</span>
+                                <span class="photo-count"><i class="fas fa-camera"></i> 7 photos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span class="review-date">2 weeks ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>The vulnerability database here is incredibly comprehensive. As a penetration tester, I rely on CyberPulse for up-to-date information on the latest exploits and security patches.</p>
+                        <p>My only suggestion would be to add more technical deep dives for advanced users. Otherwise, this is my go-to resource for cybersecurity intelligence.</p>
+                    </div>
+                </div>
+                
+                <div class="user-review">
+                    <div class="review-header">
+                        <div class="user-avatar">SM</div>
+                        <div class="user-info">
+                            <div class="user-name">Sarah Mitchell</div>
+                            <div class="review-meta">
+                                <span class="review-count"><i class="fas fa-star"></i> 6 reviews</span>
+                                <span class="photo-count"><i class="fas fa-camera"></i> 1 photo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="review-date">3 days ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>I'm relatively new to the cybersecurity field, and CyberPulse has been an incredible learning resource. The community is welcoming and always willing to help beginners understand complex topics.</p>
+                        <p>The weekly threat roundups have helped me stay current with industry trends during job interviews. Landed my first cybersecurity role thanks to this platform!</p>
+                    </div>
+                </div>
+                
+                <div class="user-review">
+                    <div class="review-header">
+                        <div class="user-avatar">RK</div>
+                        <div class="user-info">
+                            <div class="user-name">Robert Kowalski</div>
+                            <div class="review-meta">
+                                <span class="review-count"><i class="fas fa-star"></i> 31 reviews</span>
+                                <span class="photo-count"><i class="fas fa-camera"></i> 9 photos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="review-date">1 month ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>As a CISO, I appreciate the executive briefings that help me communicate cyber risks to our board effectively. The data visualization tools and ready-to-use reports save my team countless hours.</p>
+                        <p>We've implemented several best practices learned from CyberPulse that have significantly improved our security posture. The ROI on our subscription has been tremendous.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer id="contact">
+      
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+       
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const newsCards = document.querySelectorAll('.news-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                newsCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const tags = card.getAttribute('data-tags');
+                        if (tags.includes(filter)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+        
+        newsCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.classList.contains('news-tag') || 
+                    e.target.classList.contains('filter-btn') ||
+                    e.target.tagName === 'BUTTON' ||
+                    e.target.tagName === 'A') {
+                    return;
+                }
+                
+                const currentlyExpanded = document.querySelector('.news-card.expanded');
+                if (currentlyExpanded && currentlyExpanded !== card) {
+                    currentlyExpanded.classList.remove('expanded');
+                    const hiddenContent = currentlyExpanded.querySelector('.expanded-content');
+                    if (hiddenContent) {
+                        hiddenContent.classList.add('hidden');
+                    }
+                }
+                
+                card.classList.toggle('expanded');
+                const hiddenContent = card.querySelector('.expanded-content');
+                if (hiddenContent) {
+                    hiddenContent.classList.toggle('hidden');
+                }
+            });
+        });
+        
+        const newsTags = document.querySelectorAll('.news-tag');
+        
+        newsTags.forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                const tagText = tag.textContent.toLowerCase();
+                
+                newsCards.forEach(card => {
+                    const tags = card.getAttribute('data-tags');
+                    if (tags.includes(tagText)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                filterButtons.forEach(button => {
+                    button.classList.remove('active');
+                    if (button.getAttribute('data-filter') === 'all') {
+                        button.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineBoxes = document.querySelectorAll('.timeline-box');
+            
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            timelineBoxes.forEach(box => {
+                timelineObserver.observe(box);
+            });
+            
+            const animatedElements = document.querySelectorAll('.animated');
+            
+            const generalObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                generalObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

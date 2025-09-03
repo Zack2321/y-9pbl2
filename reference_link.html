@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberAware: Online Safety Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: black;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            color: white;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .intro {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .intro h2 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+        }
+        
+        .accordion {
+            margin-bottom: 40px;
+        }
+        
+        .accordion-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .accordion-header {
+            padding: 20px;
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .accordion-header:hover {
+            background: linear-gradient(to right, #3498db, #2980b9);
+        }
+        
+        .accordion-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        
+        .accordion-content.active {
+            padding: 25px;
+            max-height: 1000px;
+        }
+        
+        .accordion-content ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        
+        .accordion-content li {
+            margin-bottom: 10px;
+        }
+        
+        .resources {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .resources h2 {
+            color: #1a2a6c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-card h3 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+        }
+        
+        .resource-card a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .resource-card a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .accordion-header h3 {
+                font-size: 1.2rem;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-shield-alt"></i> CyberAware</h1>
+            <p>Your guide to online safety and security in the digital age</p>
+        </header>
+        
+        <section class="intro">
+            <h2>Why Online Safety Matters</h2>
+            <p>The internet offers incredible opportunities for learning, communication, and entertainment. However, it also presents various risks including identity theft, malware, phishing scams, and privacy violations. Being aware of these dangers and knowing how to protect yourself is essential for everyone who goes online.</p>
+            <p>Use this resource to educate yourself and others about online risks and how to stay safe in the digital world.</p>
+        </section>
+        
+        <section class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3><i class="fas fa-key"></i> Password Security</h3>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Strong passwords are your first line of defense against cyber threats. Follow these guidelines:</p>
+                    <ul>
+                        <li>Use at least 12 characters with a mix of uppercase, lowercase, numbers, and symbols</li>
+                        <li>Avoid using personal information like names or birthdates</li>
+                        <li>Never reuse passwords across different accounts</li>
+                        <li>Consider using a reputable password manager</li>
+                        <li>Enable two-factor authentication whenever possible</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3><i class="fas fa-fish"></i> Phishing Awareness</h3>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Phishing attacks try to trick you into revealing sensitive information. Recognize and avoid them:</p>
+                    <ul>
+                        <li>Be suspicious of unsolicited emails asking for personal information</li>
+                        <li>Check URLs before clicking - hover over links to see the actual address</li>
+                        <li>Look for poor grammar and spelling - common in phishing attempts</li>
+                        <li>Verify requests for sensitive information by contacting the company directly</li>
+                        <li>Be cautious of urgent or threatening language designed to make you act quickly</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3><i class="fas fa-lock"></i> Privacy Protection</h3>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Protecting your privacy online is crucial in the digital age:</p>
+                    <ul>
+                        <li>Review and adjust privacy settings on social media platforms regularly</li>
+                        <li>Be cautious about what personal information you share online</li>
+                        <li>Use a VPN when connecting to public Wi-Fi networks</li>
+                        <li>Regularly check app permissions on your devices</li>
+                        <li>Consider using privacy-focused browsers and search engines</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3><i class="fas fa-virus"></i> Malware Prevention</h3>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Protect your devices from malicious software:</p>
+                    <ul>
+                        <li>Install reputable antivirus and anti-malware software</li>
+                        <li>Keep your operating system and applications updated</li>
+                        <li>Be cautious when downloading files or software from the internet</li>
+                        <li>Don't open email attachments from unknown senders</li>
+                        <li>Regularly back up your important data</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3><i class="fas fa-child"></i> Child Online Safety</h3>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Keep children safe in the digital world:</p>
+                    <ul>
+                        <li>Educate children about online risks in an age-appropriate way</li>
+                        <li>Set clear rules and boundaries for internet use</li>
+                        <li>Use parental control software to filter and monitor activity</li>
+                        <li>Keep devices in common areas where you can supervise usage</li>
+                        <li>Encourage open communication about their online experiences</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="resources">
+            <h2>Additional Resources</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>StaySafeOnline</h3>
+                    <p>National Cyber Security Alliance's resource for online safety education</p>
+                    <a href="https://www.staysafeonline.org/" target="_blank">Visit Website <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>CyberAware (UK Govt.)</h3>
+                    <p>UK government's advice on how to stay secure online</p>
+                    <a href="https://www.ncsc.gov.uk/collection/top-tips-for-staying-secure-online" target="_blank">Visit Website <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Common Sense Media</h3>
+                    <p>Resources for parents and educators on digital literacy and safety</p>
+                    <a href="https://www.commonsense.org/education/digital-citizenship" target="_blank">Visit Website <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2023 CyberAware Online Safety Initiative | Spread awareness, stay secure</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('.accordion-icon');
+                    
+                    // Toggle active class
+                    content.classList.toggle('active');
+                    
+                    // Change icon
+                    if (content.classList.contains('active')) {
+                        icon.textContent = '-';
+                    } else {
+                        icon.textContent = '+';
+                    }
+                    
+                    // Close other accordion items
+                    accordionHeaders.forEach(otherHeader => {
+                        if (otherHeader !== header) {
+                            const otherContent = otherHeader.nextElementSibling;
+                            const otherIcon = otherHeader.querySelector('.accordion-icon');
+                            
+                            otherContent.classList.remove('active');
+                            otherIcon.textContent = '+';
+                        }
+                    });
+                });
+            });
+            
+            // Open first accordion item by default
+            if (accordionHeaders.length > 0) {
+                accordionHeaders[0].click();
+            }
+        });
+    </script>
+</body>
+</html>

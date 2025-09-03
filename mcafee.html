@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antivirus Software Comparison</title>
+      <link rel="icon" href="ASH_LOGO.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap');
+        
+        :root {
+            --neon-cyan: #0ff;
+            --neon-pink: #f0f;
+            --neon-purple: #9d00ff;
+            --deep-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+            --text-glow: 0 极 0 10px #0ff;
+            --pink-glow: 0 0 10px rgba(255, 0, 255, 0.7);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.05) 0%, transparent 20%);
+            position: relative;
+            padding-top: 70px;
+        }
+        
+        /* Navbar Styles */
+
+
+       .navbar {
+            background: rgba(0, 0, 0, 0.9) !important;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            z-index: 1000;
+            padding: 0.3rem 0;
+            min-height: 60px;
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1.6rem;
+            color: var(--neon-cyan) !important;
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 255, 255, 0.5);
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+            position: relative;
+            padding: 0;
+            margin-right: 35px;
+            margin-left: 30px;
+            white-space: nowrap;
+        }
+        
+        .navbar-brand:hover {
+            text-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.7);
+        }
+        
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .nav-link {
+            color: #fff !important;
+            margin: 0 6px;
+            position: relative;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 6px 4px !important;
+            white-space: nowrap;
+        }
+        
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            transition: 0.4s ease;
+            box-shadow: 0 0 8px var(--neon-cyan), 0 0 8px var(--neon-pink);
+            border-radius: 2px;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--neon-cyan) !important;
+            text-shadow: var(--text-glow);
+        }
+        
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        
+        .nav-item {
+            margin: 0 3px;
+        }
+        
+        .btn-neon {
+            border: 2px solid var(--neon-cyan);
+            background-color: transparent;
+            color: var(--neon-cyan);
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+        }
+        .btn-neon:hover {
+            background-color: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 30px var(--neon-cyan), 0 0 60px rgba(0, 255, 255, 0.6);
+            transform: translateY(-3px);
+        }
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+            transition: 0.6s;
+        }
+        .btn-neon:hover::before {
+            left: 100%;
+        }
+        
+        .search-form {
+            position: relative;
+            margin-right: 15px;
+        }
+        .search-input {
+            background: rgba(0, 20, 30, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 8px 15px;
+            padding-right: 40px;
+            color: white;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            width: 300px;
+        }
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--neon-cyan);
+            cursor: pointer;
+        }
+        
+        /* Main content styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 12px 24px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px极 10px rgba极(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ddd;
+        }
+        
+        .filter-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            border-color: #3498db;
+        }
+        
+        .filter-btn.active {
+            background: #2c3e50;
+            color: white;
+            border-color: #3498db;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+        
+        .filter-description {
+            text-align: center;
+            margin: 20px auto 30px;
+            max-width: 800px;
+            padding: 15px;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            border: 1px solid #444;
+        }
+        
+        .filter-description.active {
+            display: block;
+        }
+        
+        .filter-description h3 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .software-card {
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid #333;
+        }
+        
+        .software-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
+            border-color: #3498db;
+        }
+        
+        .image-container {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .software-image {
+            max-width: 100%;
+            max-height: 140px;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+        
+        .software-card:hover .software-image {
+            transform: scale(1.05);
+        }
+        
+        .software-rating {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #f39c12;
+            border: 1px solid #444;
+        }
+        
+        .see-more {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #3498db;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            border: 1px solid #444;
+        }
+        
+        .see-more:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        .info-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .software-name {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .software-price {
+            font-size: 0.9rem;
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .software-description {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 15px;
+            overflow: hidden;
+            position: relative;
+            max-height: 70px;
+            transition: max-height 0.3s ease;
+            flex-grow: 1;
+        }
+        
+        .software-description.expanded {
+            max-height: 500px;
+        }
+        
+        .software-features {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .feature-tag {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .read-more {
+            color: #3498db;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: color 0.3s;
+            margin-top: 10px;
+        }
+        
+        .read-more:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        /* Footer Styles */
+       /* Footer Styles */
+  footer .container-fluid {
+  background-color: #060607;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.footer-col {
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col h4 {
+  color: white;
+  margin-bottom: 25px;
+  font-size: 22px;
+  position: relative;
+  font-family: 'Ubuntu', sans-serif;
+  display: inline-block;
+}
+
+.footer-col h4::before {
+  content: '';
+  width: 70px;
+  height: 2px;
+  position: absolute;
+  background-color: #2a5da5;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer-col ul li {
+  padding: 10px 0;
+}
+
+.footer-col ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+.footer-col ul li a:hover {
+  opacity: 1;
+  color: var(--neon-cyan);
+}
+
+.footer-hr {
+  width: 80%;
+  margin: 20px auto;
+  border-top: 2px solid #2a5da5;
+  opacity: 0.6;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.social-icons a {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+.fa-facebook {
+  background: #3b5998;
+}
+
+.fa-youtube {
+  background: #ff0000;
+}
+
+.fa-google {
+  background: #db4a39;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.col {
+  color: white;
+  margin-top: 10px;
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .footer-col {
+    width: 30%;
+    max-width: 250px;
+  }
+  
+  .footer-row {
+    justify-content: space-around;
+  }
+}
+    .col{
+      color: white;
+    }
+    
+    @media (min-width: 768px) {
+      .footer-col {
+        width: 30%;
+      }
+    }
+
+        /* Auth Modal Styles */
+        .modal-content {
+            background-color: rgba(10, 20, 30, 0.95);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            color: white;
+        }
+        .modal-header {
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .btn-close {
+            filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);
+        }
+        .form-control {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: white;
+        }
+        .form-control:focus {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            color: white;
+        }
+        .form-label {
+            color: var(--neon-cyan);
+        }
+        .login-error, .register-error, .register-success {
+            color: #ff6b6b;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        .register-success {
+            color: var(--neon-cyan);
+        }
+        .is-invalid {
+            border-color: #ff6b6b !important;
+            box-shadow: 0 0 0 10px rgba(255, 107, 107, 0.5) !important;
+        }
+        .invalid-feedback {
+            color: #ff6b6b;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .dropdown-menu {
+            background-color: rgba(0, 20, 30, 0.95);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        .dropdown-item {
+            color: white;
+            transition: all 0.3s;
+        }
+        .dropdown-item:hover {
+            background-color: rgba(0, 255极, 255, 0.2);
+            color: var(--neon-cyan);
+        }
+        .dropdown-divider {
+            border-color: rgba(0, 255, 255, 0.2);
+        }
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--neon-purple);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        
+        /* Search Results Styles */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(0, 20, 30, 0.95);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .search-result-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-result-item:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .no-results {
+            padding: 10px 15px;
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        @media (max-width: 992px) {
+            .software-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .software-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .software-card {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .image-container {
+                height: 200px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .filter-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .footer-col {
+                width: 100%;
+            }
+            
+            .search-input {
+                width: 180px;
+            }
+            .search-input:focus {
+                width: 220px;
+            }
+        }
+        
+ footer .container-fluid {
+  background-color: #060607;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.footer-col {
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col h4 {
+  color: white;
+  margin-bottom: 25px;
+  font-size: 22px;
+  position: relative;
+  font-family: 'Ubuntu', sans-serif;
+  display: inline-block;
+}
+
+.footer-col h4::before {
+  content: '';
+  width: 70px;
+  height: 2px;
+  position: absolute;
+  background-color: #2a5da5;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer-col ul li {
+  padding: 10px 0;
+}
+
+.footer-col ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+.footer-col ul li a:hover {
+  opacity: 1;
+  color: var(--neon-cyan);
+}
+
+.footer-hr {
+  width: 80%;
+  margin: 20px auto;
+  border-top: 2px solid #2a5da5;
+  opacity: 0.6;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.social-icons a {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+.fa-facebook {
+  background: #3b5998;
+}
+
+.fa-youtube {
+  background: #ff0000;
+}
+
+.fa-google {
+  background: #db4a39;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.col {
+  color: white;
+  margin-top: 10px;
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .footer-col {
+    width: 30%;
+    max-width: 250px;
+  }
+  
+  .footer-row {
+    justify-content: space-around;
+  }
+}
+    .col{
+      color: white;
+    }
+    
+    @media (min-width: 768px) {
+      .footer-col {
+        width: 30%;
+      }
+    }
+ .modal-content {
+      background-color: rgba(10, 20, 30, 0.95);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      color: white;
+    }
+    .modal-header {
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    }
+    .modal-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px var(--neon-cyan);
+    }
+    .btn-close {
+      filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);
+    }
+    .form-control {
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      color: white;
+    }
+    .form-control:focus {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      color: white;
+    }
+    .form-label {
+      color: var(--neon-cyan);
+    }
+    .login-error, .register-error, .register-success {
+      color: #ff6b6b;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+    .register-success {
+      color: var(--neon-cyan);
+    }
+    .is-invalid {
+      border-color: #ff6b6b !important;
+      box-shadow: 0 0 10px rgba(255, 107, 107, 0.5) !important;
+    }
+    .invalid-feedback {
+      color: #ff6b6b;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+    
+      .terms-modal .modal-dialog {
+      max-width: 800px;
+    }
+    
+    .terms-modal .modal-content {
+      max-height: 80vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .terms-modal .modal-body {
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .terms-section {
+      margin-bottom: 25px;
+    }
+    
+    .terms-section h3 {
+      color: var(--neon-cyan);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .terms-highlight {
+      background: rgba(0, 255, 255, 0.1);
+      padding: 15px;
+      border-left: 3px solid var(--neon-cyan);
+      border-radius: 0 5px 5px 0;
+      margin: 15px 0;
+    }
+    
+    .terms-list {
+      padding-left: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .terms-list li {
+      margin-bottom: 8px;
+    }
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="ASH_LOGO.png" width="40px"></i>ASH</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cyberNavbar" aria-controls="cyberNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="background-color:#0ff;"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="cyberNavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <a class="nav-link" href="mcafee.html" >
+            AV softwares
+          </a>
+        <li class="nav-item"><a class="nav-link" href="about-us2 (1).html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact1 1.html">Contact Us</a></li>
+      </ul>
+      
+      <form class="search-form d-flex">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+        <button type="button" class="search-btn" id="searchButton">
+          <i class="bi bi-search"></i>
+        </button>
+        <div class="search-results" id="searchResults"></div>
+      </form>
+      
+      <div id="authButtons">
+        <button class="btn btn-neon" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="bi bi-shield-check me-2"></i>Sign in</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">SECURE LOGIN</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" required>
+            <div class="invalid-feedback">Please enter a valid username (min 4 characters)</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required>
+            <div class="invalid-feedback">Password must be at least 6 characters</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="remember Me">Remember me</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Login</button>
+          </div>
+          <div id="loginError" class="login-error">
+            Invalid credentials. Please try again.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">New user? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Register here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">SECURE REGISTRATION</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="registerForm">
+          <div class="mb-3">
+            <label for="regUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="regUsername" required>
+            <div class="invalid-feedback">Username must be 4-20 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" required>
+            <div class="invalid-feedback">Please enter a valid email</div>
+          </div>
+          <div class="mb-3">
+            <label for="regPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="regPassword" required>
+            <div class="invalid-feedback">Password must be at least 8 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regConfirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="regConfirmPassword" required>
+            <div class="invalid-feedback">Passwords must match</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+            <label class="form-check-label" for="termsCheck">I agree to the <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Policy</a></label>
+            <div class="invalid-feedback">You must agree to the terms</div>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Register</button>
+          </div>
+          <div id="registerError" class="register-error">
+            Registration error. Please try again.
+          </div>
+          <div id="registerSuccess" class="register-success">
+            Registration successful! You can now login.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">Already have an account? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Login here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Terms Modal -->
+<div class="modal fade terms-modal" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Terms & Policies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="terms-section">
+          <h3>Terms and Conditions</h3>
+          <p>By accessing this website, you are agreeing to be bound by these website Terms and Conditions, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.</p>
+          
+          <div class="terms-highlight">
+            <p><strong>Important:</strong> If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
+          </div>
+        
+        <div class="terms-section">
+          <h3>Privacy Policy</h3>
+          <p>Your privacy is important to us. It is our policy to respect your privacy regarding any information we may collect from you across our website.</p>
+          
+          <h4>Information We Collect</h4>
+          <p>We only collect information about you if we have a reason to do so — for example, to provide our services, to communicate with you, or to make our services better.</p>
+          
+          <h4>How We Use Your Information</h4>
+          <p>We use the information we collect in various ways, including to:</p>
+          <ul class="terms-list">
+            <li>Provide, operate, and maintain our services</li>
+            <li>Improve, personalize, and expand our services</li>
+            <li>Understand and analyze how you use our services</li>
+            <li>Develop new products, services, features, and functionality</li>
+          </ul>
+        </div>
+        
+        
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Main content -->
+<div class="container">
+    <header>
+        <h1>Antivirus Software Comparison</h1>
+        <p class="subtitle">Find the best protection for your devices with our comprehensive comparison of top antivirus solutions</p>
+    </header>
+    
+    <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">
+            <i class="fas fa-layer-group"></i> All Software
+        </button>
+        <button class="filter-btn" data-filter="premium">
+            <i class="fas fa-crown"></i> Premium
+        </button>
+        <button class="filter-btn" data-filter="free">
+            <i class="fas fa-dollar-sign"></i> Free Options
+        </button>
+        <button class="filter-btn" data-filter="business">
+            <i class="fas fa-briefcase"></i> Business
+        </button>
+        <button class="filter-btn" data-filter="home">
+            <i class="fas fa-home"></i> Home Users
+        </button>
+        <button class="filter-btn" data-filter="value">
+            <i class="fas fa-star"></i> Best Value
+        </button>
+    </div>
+    
+    <div class="filter-description active" id="desc-all">
+        <h3>All Antivirus Software</h3>
+        <p>Browse our complete collection of antivirus solutions. This includes everything from free basic protection to comprehensive premium security suites. Each product has been thoroughly tested for effectiveness, system impact, and value for money.</p>
+    </div>
+    
+    <div class="filter-description" id="desc-premium">
+        <h3>Premium Antivirus Software</h3>
+        <p>These are paid antivirus solutions that offer comprehensive protection with advanced features like real-time scanning, firewalls, VPNs, password managers, and parental controls. Premium options typically provide better protection and more features than free versions.</p>
+    </div>
+
+    <div class="filter-description" id="desc-free">
+        <h3>Free Antivirus Options</h3>
+        <p>These antivirus solutions offer basic protection at no cost. While they may lack some advanced features of paid versions, they still provide essential protection against viruses, malware, and other threats. Perfect for users with basic security needs.</p>
+    </div>
+
+    <div class="filter-description" id="desc-business">
+        <h3>Business Antivirus Solutions</h3>
+        <p>These antivirus products are designed for business environments, offering centralized management, network protection, and specialized features for protecting servers, endpoints, and business data. They often include additional security layers for enterprise needs.</p>
+    </div>
+
+    <div class="filter-description" id="desc-home">
+        <h3>Home User Antivirus</h3>
+        <p>These antivirus solutions are tailored for home users, offering user-friendly interfaces, parental controls, and protection for multiple devices. They balance strong security with ease of use for non-technical users.</p>
+    </div>
+
+    <div class="filter-description" id="desc-value">
+        <h3>Best Value Antivirus</h3>
+        <p>These antivirus solutions offer the best balance of features and price. They provide excellent protection without breaking the bank, making them ideal for users who want comprehensive security at an affordable price point.</p>
+    </div>
+    
+    <div class="software-grid">
+        <!-- Bitdefender -->
+         <div class="software-card" data-category="premium business value" data-name="bitdefender">
+            <div class="image-container">
+                <img src="bit.png" style="width: 500px;" alt="Bitdefender" class="software-image">
+                <div class="software-rating">★ 4.7/5</div>
+                <a href="https://www.bitdefender.com/en-us/"><div class="see-more" data-software="bitdefender">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Bitdefender</span>
+                    <span class="software-price">$44.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Real-time Protection</span>
+                    <span class="feature-tag">VPN Included</span>
+                    <span class="feature-tag">Multi-Device</span>
+                </div>
+                <p class="software-description">Bitdefender provides award-winning cybersecurity solutions with advanced threat detection, multi-layer ransomware protection, and minimal impact on system performance. Uses machine learning and AI to detect new threats in real-time.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+                
+            </div>
+        </div>
+        
+        <!-- Kaspersky -->
+        <div class="software-card" data-category="premium business home" data-name="kaspersky">
+            <div class="image-container">
+                <img src="Kaspersky.svg"style="width: 500px;" alt="Kaspersky" class="software-image">
+                <div class="software-rating">★ 4.6/5</div>
+                <a href="https://www.kaspersky.com/"><div class="see-more" data-software="kaspersky">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Kaspersky</span>
+                    <span class="software-price">$39.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Safe Money</span>
+                    <span class="feature-tag">Parental Controls</span>
+                    <span class="feature-tag">Privacy Protection</span>
+                </div>
+                <p class="software-description">Kaspersky Lab delivers premium antivirus and internet security solutions featuring real-time protection, phishing detection, and advanced parental controls. Known for its strong malware detection rates and low system impact.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- Norton -->
+        <div class="software-card" data-category="premium home value" data-name="norton">
+            <div class="image-container">
+                <img src="norton-360-deluxe_u2zd.jpg" style="width: 500px;" alt="Norton" class="software-image">
+                <div class="software-rating">★ 4.5/5</div>
+                <a href="https://us.norton.com/"><div class="see-more" data-software="norton">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Norton 360 Deluxe</span>
+                    <span class="software-price">$49.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Dark Web Monitoring</span>
+                    <span class="feature-tag">Cloud Backup</span>
+                    <span class="feature-tag">VPN Unlimited</span>
+                </div>
+                <p class="software-description">NortonLifeLock offers comprehensive security suites with features like dark web monitoring, 50GB cloud backup, and a secure VPN. Provides 100% virus protection promise and money-back guarantee.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- McAfee -->
+        <div class="software-card" data-category="premium business" data-name="mcafee">
+            <div class="image-container">
+                <img src="McAfee.jpg" style="width: 500px;" alt="McAfee" class="software-image">
+                <div class="software-rating">★ 4.3/5</div>
+                <a href="https://www.mcafee.com/"><div class="see-more" data-software="mcafee">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>McAfee</span>
+                    <span class="software-price">$34.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Identity Protection</span>
+                    <span class="feature-tag">Home Network Security</span>
+                    <span class="feature-tag">Performance Optimization</span>
+                </div>
+                <p class="software-description">McAfee provides multi-device protection, identity theft safeguards, and home network security. Known for its comprehensive internet security suite that covers all devices in a household.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- Avast -->
+        <div class="software-card" data-category="free home value" data-name="avast">
+            <div class="image-container">
+                <img src="Avast.png" style="width: 500px;" alt="Avast" class="software-image">
+                <div class="software-rating">★ 4.4/5</div>
+                <a href="https://www.avast.com/lp-ppc-free-av-brand?full_trSrc=mmm_ava_tst_007_402_a&om_sem_cid=hho_sem_sy:~en-ww_ava_sch_brn_exc_adw_dtp~&utm_source=google&utm_medium=cpc&utm_campaign=en-ww_ava_sch_brn_exc_adw_dtp&gclsrc=aw.ds&gad_source=1&gad_campaignid=908893877&gclid=Cj0KCQjwwsrFBhD6ARIsAPnUFD0bXzBF3z-WRuISyQ02uX1Wz9rJAE4VmoaQB5IUvUIb1wYCLbrdmGwaApynEALw_wcB?full_trSrc=mmm_ava_tst_007_402_a&om_sem_cid=hho_sem_sy:~en-ww_ava_sch_brn_exc_adw_dtp~&utm_source=google&utm_medium=cpc&utm_campaign=en-ww_ava_sch_brn_exc_adw_dtp&gclsrc=aw.ds&gad_source=1&gad_campaignid=908893877&gclid=Cj0KCQjwwsrFBhD6ARIsAPnUFD0bXzBF3z-WRuISyQ02uX1Wz9rJAE4VmoaQB5IUvUIb1wYCLbrdmGwaApynEALw_wcB#pc"><div class="see-more" data-software="avast">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Avast</span>
+                    <span class="software-price">Free / $69.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Firewall</span>
+                    <span class="feature-tag">Ransomware Shield</span>
+                    <span class="feature-tag">Sandbox Technology</span>
+                </div>
+                <p class="software-description">Avast offers both free and premium antivirus solutions with features like behavior-based detection, Wi-Fi inspector, and browser cleanup. One of the most popular free antivirus options available.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- ESET -->
+        <div class="software-card" data-category="premium business" data-name="eset">
+            <div class="image-container">
+                <img src="ESET_logo.svg.png" style="width: 500px;"alt="ESET" class="software-image">
+                <div class="software-rating">★ 4.5/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiulY6ekLKPAxWbzjgGHVN2DdQQFnoECAsQAQ&url=https%3A%2F%2Fwww.eset.com%2Fus%2F%3Fsrsltid%3DAfmBOooQ_Bksb_NWPINkr_Pa8DW3Z2CR-0RKeZsW7b6CnfJ8YpwmhnjN&usg=AOvVaw1gQACVI6ZcJ4GOS27zIY_D&opi=89978449"><div class="see-more" data-software="eset">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>ESET</span>
+                    <span class="software-price">$59.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Gaming Mode</span>
+                    <span class="feature-tag">Anti-Phishing</span>
+                    <span class="feature-tag">Botnet Protection</极 span>
+                </div>
+                <p class="software-description">ESET is known for its lightweight yet powerful antivirus solutions with advanced scanning technology, anti-phishing protection, and gaming mode. Offers solutions for home and business users.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- Trend Micro -->
+        <div class="software-card" data-category="premium business" data-name="trend micro">
+            <div class="image-container">
+                <img src="Trend Micro.jpg" style="width: 500px;" alt="Trend Micro" class="software-image">
+                <div class="software-rating">★ 4.2/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwimoufGkLKPAxWpyTgGHe2fK-wQFnoECBQQAQ&url=https%3A%2F%2Fwww.trendmicro.com%2Fen_us%2Fbusiness.html&usg=AOvVaw000xfWVn4JmMVaGDLSNfLy&opi=89978449"><div class="see-more" data-software="trendmicro">See More <i class="fas fa-arrow-right"></i></div></a>
+
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Trend Micro</span>
+                    <span class="software-price">$39.95/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Pay Guard</span>
+                    <span class="feature-tag">Social Media Protection</span>
+                    <span class="feature-tag">Parental Controls</span>
+                </div>
+                <p class="software-description">Trend Micro provides AI-powered threat defense with ransomware protection, parental controls, and pay guard for online banking. Strong focus on cloud-based security solutions.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- Sophos -->
+        <div class="software-card" data-category="business value" data-name="sophos">
+            <div class="image-container">
+                <img src="Sophos.png" style="width: 500px;" alt="Sophos" class="software-image">
+                <div class="software-rating">★ 4.4/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjdnMDpkLKPAxWz3jgGHZXKI-YQFnoECAoQAQ&url=https%3A%2F%2Fwww.sophos.com%2Fen-us&usg=AOvVaw1AK-NkwVNOcQa5eOVksFPu&opi=89978449"><div class="see-more" data-software="sophos">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Sophos</span>
+                    <span class="software-price">$45.00/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Remote Management</span>
+                    <span class="feature-tag">Web Filtering</span>
+                    <span class="feature-tag">Privacy Protection</span>
+                </div>
+                <p class="software-description">Sophos offers enterprise-grade security for home users with features like real-time antivirus, ransomware protection, and privacy filtering. Known for its strong business security solutions.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- AVG -->
+        <div class="software-card" data-category="free home value" data-name="avg">
+            <div class="image-container">
+                <img src="AVG.png" alt="AVG" class="software-image">
+                <div class="software-rating">★ 4.1/5</div>
+                <a href="https://www.google.com/aclk?sa=L&ai=DChsSEwjC3MGFkbKPAxV2pWYCHRhWFwcYACICCAEQABoCc20&ae=2&co=1&gclid=Cj0KCQjwwsrFBhD6ARIsAPnUFD2odSZFCxPB9Wj8OMx6R8EFZk0btEkaFjgINbUUx8du6UDw_z5TiLEaAl5sEALw_wcB&cid=CAASY-RoFmgYO8VAzFBDvPiAEQyhGXm2bjO7rW5-n5pCkMJvILsS-1_rshRnZj4DOQoR-BdYekmK5BIjbyeRZEASu2Sh5u4w0BSDfkYvh9Ex-lzzXFwxucjtOgZ6DkGEYLDabR9ThQ&cce=2&sig=AOD64_2Zcj6ZXVVjHBoppAU16MXtVchsug&q&adurl&ved=2ahUKEwjO8bmFkbKPAxVdzjgGHUm-G4wQ0Qx6BAgUEAE"><div class="see-more" data-software="avg">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>AVG</span>
+                    <span class="software-price">Free / $39.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Webcam Protection</span>
+                    <span class="feature-tag">File Shredder</span>
+                    <span class="feature-tag">Tune-Up Utilities</span>
+                </div>
+                <p class="software-description">AVG (now part of Avast) provides reliable free and paid antivirus protection with features like email shielding, web protection, and performance enhancement tools. User-friendly interface.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- Malwarebytes -->
+        <div class="software-card" data-category="free home value" data-name="malwarebytes">
+            <div class="image-container">
+                <img src="Malwarebytes.png" style="width: 500px;" alt="Malwarebytes" class="software-image">
+                <div class="software-rating">★ 4.3/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiW__uakbKPAxXTyqACHX4hIMIQFnoECAoQAQ&url=https%3A%2F%2Fwww.malwarebytes.com%2F&usg=AOvVaw1ToGeSFOqyBKUOwAiixOAo&opi=89978449"><div class="see-more" data-software="malwarebytes">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Malwarebytes</span>
+                    <span class="software-price">Free / $39.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Anti-Exploit</span>
+                    <span class="feature-tag">Anti-Ransomware</span>
+                    <span class="feature-tag">Real-Time Protection</span>
+                </div>
+                <p class="software-description">Malwarebytes specializes in detecting and removing malware that traditional antivirus programs might miss. Offers real-time protection, anti-ransomware, and exploit prevention.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- NEW ANTIVIRUS SOFTWARE ADDITIONS -->
+        
+        <!-- Avira -->
+        <div class="software-card" data-category="free premium value" data-name="avira">
+            <div class="image-container">
+                <img src="https://www.avira.com/favicon.ico" alt="Avira" class="software-image">
+                <div class="software-rating">★ 4.2/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj2h7yrkbKPAxU_zjgGHQQCGRIQFnoECAsQAQ&url=https%3A%2F%2Fwww.avira.com%2F%3Fsrsltid%3DAfmBOop0fQlOX3ioefm2F3_TYMq-KRJTI9_MG1nc8DGQQdKBfy9o5enk&usg=AOvVaw1RqONruAAdoJNVKnlS5xmM&opi=89978449"><div class="see-more" data-software="avira">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Avira</span>
+                    <span class="software-price">Free / $47.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">System Speedup</span>
+                    <span class="feature-tag">VPN Limited</span>
+                    <span class="feature-tag">Password Manager</span>
+                </div>
+                <p class="software-description">Avira offers both free and premium protection with a focus on privacy and performance. Includes system optimization tools, a password manager, and limited VPN in its free version. Known for its strong cloud-based scanning.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- Windows Defender -->
+        <div class="software-card" data-category="free home" data-name="windows defender">
+            <div class="image-container">
+                <img src="https://www.microsoft.com/favicon.ico" alt="Windows Defender" class="software-image">
+                <div class="software-rating">★ 4.0/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiEzZPakbKPAxWH9DgGHVeyEB8QFnoECBYQAQ&url=https%3A%2F%2Fwww.microsoft.com%2Fen-us%2Fwindows%2Fcomprehensive-security&usg=AOvVaw0NM86JCTdLlafGT6F_Fyqc&opi=89978449"><div class="see-more" data-software="windowsdefender">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Windows Defender</span>
+                    <span class="software-price">Free</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Built-in</span>
+                    <span class="feature-tag">Ransomware Protection</span>
+                    <span class="feature-tag">Parental Controls</span>
+                </div>
+                <p class="software-description">Microsoft's built-in antivirus solution for Windows 10 and 11. Provides real-time protection against viruses, malware, and ransomware. Integrates seamlessly with Windows and offers family safety features with Microsoft accounts.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- Webroot -->
+        <div class="software-card" data-category="premium business" data-name="webroot">
+            <div class="image-container">
+                <img src="https://www.webroot.com/favicon.ico" alt="Webroot" class="software-image">
+                <div class="software-rating">★ 4.3/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjn59jwkbKPAxVd1jgGHTMPAw4QFnoECBQQAQ&url=https%3A%2F%2Fwww.webroot.com%2Fus%2Fen%3Fsrsltid%3DAfmBOorBvLVIKaNXNDyDU3Apyv3rQ29wHtzzfEu1OCinuxLzTws8nQ8c&usg=AOvVaw3zI52yEyNnKp6CikeW8uT5&opi=89978449"><div class="see-more" data-software="webroot">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Webroot</span>
+                    <span class="software-price">$39.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Lightweight</span>
+                    <span class="feature极-tag">Cloud-Based</span>
+                    <span class="feature-tag">Identity Protection</span>
+                </div>
+                <p class="software-description">Webroot uses cloud-based technology for fast, lightweight protection that doesn't slow down your system. Features identity theft protection, a secure browser for online transactions, and real-time anti-phishing.</p>
+                <div class="read-more">Read More <极 i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- F-Secure -->
+        <div class="software-card" data-category="premium home" data-name="f-secure">
+            <div class="image-container">
+                <img src="https://www.f-secure.com/favicon.ico" alt="F-Secure" class="software-image">
+                <div class="software-rating">★ 4.4/5</div>
+                <a href="https://www.google.com/aclk?sa=L&ai=DChsSEwjX4sLfkrKPAxUtjUsFHaJmGPUYACICCAEQABoCc2Y&co=1&gclid=Cj0KCQjwwsrFBhD6ARIsAPnUFD0Ds0_sq-uYoTb5EFHAjJ8_y4yv2Y51EG2JV2aa7koladLZct8DXKIaAhJREALw_wcB&cid=CAASY-Roz30uRh-6l2ZmQ3QYyaWnzQ_lWGUYSaanZq8GMY89SFXD-4rwI0_rQyIzn_LtiUu4j6AwkEeDOmxK-9raW4mw4m5cqGWczaetZzDp9zauu1tQ-tWe46T2ipxfny4ivmh-cw&cce=2&sig=AOD64_2VBg7f5KI7zkE962QWjbW8bUfJsA&q&adurl&ved=2ahUKEwjZpLrfkrKPAxX-9zgGHT8xKW4Q0Qx6BAgKEAE"><div class="see-more" data-software="fsecure">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>F-Secure</span>
+                    <span class="software-price">$39.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Banking Protection</span>
+                    <span class="feature-tag">Browsing Protection</span>
+                    <span class="feature-tag">VPN Included</span>
+                </div>
+                <p class="software-description">F-Secure offers comprehensive internet security with banking protection, browsing protection, and a VPN. Features deep learning technology for advanced threat detection and a simple, user-friendly interface.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- Panda Dome -->
+        <div class="software-card" data-category="free premium home" data-name="panda dome">
+            <div class="image-container">
+                <img src="https://www.pandasecurity.com/favicon.ico" alt="Panda Dome" class="software-image">
+                <div class="software-rating">★ 4.1/5</div>
+                <a href="https://www.google.com/aclk?sa=L&ai=DChsSEwi1k7mklLKPAxVgpGYCHS2XLjgYACICCAEQABoCc20&co=1&gclid=Cj0KCQjwwsrFBhD6ARIsAPnUFD3Tlmf6HJr17-mbqeMwzaENLTuWDnC8p1KwtWlIgVoGD10A-Vxr3uYaAgJQEALw_wcB&cid=CAASY-RoCUc2iq6OPYZ-B7m-K8T7kfPGNl0MC8Sf-tP59XdWIMzxli8d01hX2gD_TnC5wr5UB4FY2AyIEsxD8jT7SbRxbFaqkyxacoAtf8hLdC_79pVW287o1JTn5TlZ6bqHw_37jQ&cce=2&sig=AOD64_05vAwqkjii_ymb3L7dcyeyCOfzfg&q&adurl&ved=2ahUKEwiR_K-klLKPAxVM2TgGHafwBYAQ0Qx6BAgVEAE"><div class="see-more" data-software="pandadome">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Panda security</span>
+                    <span class="software-price">Free / $51.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Rescue Kit</span>
+                    <span class="feature-tag">Wi-Fi Protection</span>
+                    <span class="feature-tag">PC Cleanup</span>
+                </div>
+                <p class="software-description">Panda security offers a range of security products from free antivirus to comprehensive internet security suites. Features include a rescue kit, Wi-Fi protection, PC cleanup tools, and parental controls in premium versions.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- Comodo -->
+        <div class="software-card" data-category="free business" data-name="comodo">
+            <div class="image-container">
+                <img src="https://www.comodo.com/favicon.ico" alt="Comodo" class="software-image">
+                <div class="software-rating">★ 3.9/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjl4JrNlLKPAxVazzgGHWgGKHsQFnoECBYQAQ&url=https%3A%2F%2Fwww.comodo.com%2F&usg=AOvVaw1wadBNueQf-oT-noSMHr3D&opi=89978449"><div class="see-more" data-software="comodo">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>Comodo</span>
+                    <span class="software-price">Free / $39.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Containment Technology</span>
+                    <span class="feature-tag">Firewall</span>
+                    <span class="feature-tag">Auto-Sandboxing</span>
+                </div>
+                <p class="software-description">Comodo uses unique containment technology that runs unknown files in a sandbox environment to prevent system infection. Offers a free antivirus with firewall and auto-sandboxing features, plus premium business solutions.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- VIPRE -->
+        <div class="software-card" data-category="premium business" data-name="vipre">
+            <div class="image-container">
+                <img src="vipre.jpeg" alt="VIPRE" class="software-image">
+                <div class="software-rating">★ 4.0/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjj5fXglLKPAxVBxzgGHVzxCysQFnoECAsQAQ&url=https%3A%2F%2Fvipre.com%2F%3Fsrsltid%3DAfmBOoq1-iJXBbnXHIjFx_mhhNo1riAdYiyx3gBC0F31c91yAlKod1Jx&usg=AOvVaw1Cu_l-jrqgE9wdWnP3-oNW&opi=89978449"><div class="see-more" data-software="vipre">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>VIPRE</span>
+                    <span class="software-price">$34.99/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Email Security</span>
+                    <span class="feature-tag">Endpoint Protection</span>
+                    <span class="feature-tag">Threat Intelligence</span>
+                </div>
+                <p class="software-description">VIPRE offers advanced security solutions for home and business users with features like email security, endpoint protection, and threat intelligence. Known for its strong malware protection and low system impact.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+        
+        <!-- ZoneAlarm -->
+        <div class="software-card" data-category="free premium home" data-name="zonealarm">
+            <div class="image-container">
+                <img src="https://www.zonealarm.com/favicon.ico" alt="ZoneAlarm" class="software-image">
+                <div class="software-rating">★ 3.8/5</div>
+                <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiY7oWFlbKPAxUnzDgGHch3CaIQFnoECDkQAQ&url=https%3A%2F%2Fwww.zonealarm.com%2F&usg=AOvVaw1BStbAL_h0vJdTvJaLZXK_&opi=89978449"><div class="see-more" data-software="zonealarm">See More <i class="fas fa-arrow-right"></i></div></a>
+            </div>
+            <div class="info-container">
+                <div class="software-name">
+                    <span>ZoneAlarm</span>
+                    <span class="software-price">Free / $23.95/year</span>
+                </div>
+                <div class="software-features">
+                    <span class="feature-tag">Firewall</span>
+                    <span class="feature-tag">Identity Protection</span>
+                    <span class="feature-tag">Extreme Security</span>
+                </div>
+                <p class="software-description">ZoneAlarm is known for its powerful firewall technology that provides advanced protection against hackers, malware, and identity theft. Offers both free and premium versions with additional security layers.</p>
+                <div class="read-more">Read More <i class="fas fa-chevron-down"></i></div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+<footer id="contact">
+<footer id="contact">
+  <div class="container-fluid">
+    <div class="footer-row">
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="about-us2 (1).html">About Us</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>News</h4>
+        <ul>
+          <li><a href="#tips">Security Tips</a></li>
+          <li><a href="cyberaware.html">Cyber Awareness</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#support">Support</a></li>
+          <li><a href="reference.html">Reference</a></li>
+          <li><a href="contact1 1.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-hr"/>
+    <div class="row text-center">
+      <div class="social-icons">
+  <a href="https://facebook.com" target="_blank" class="fa fa-facebook"></a>
+  <a href="https://www.youtube.com/watch?v=X9Htg8V3eik&pp=ygWLAUhvdyBjYW4gd2UgcmFpc2UgYXdhcmVuZXNzIGFib3V0IG9ubGluZSByaXNrcyBhbmQgZGFuZ2VycyB0byBoZWxwIHBlb3BsZSBzdGF5IHNhZmUgb25saW5lIGJ5IHByb3ZpZGluZyB1c2VmdWwgc2FmZXR5IHRpcHMgYW5kIGluZm9ybWF0aW9uPyA%3D" target="_blank" class="fa fa-youtube"></a>
+  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0747563215000606" target="_blank" class="fa fa-google"></a>
+  <a href="" target="_blank" class="fa fa-twitter"></a>
+</div>
+      <div class="col">
+        <p>&copy; Copyright 2025-2026. All rights reserved. Developed by ASH.</p>
+      </div>
+    </div>  
+  </div>
+</footer>
+</footer>
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">SECURE LOGIN</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" required>
+            <div class="invalid-feedback">Please enter a valid username (min 4 characters)</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required>
+            <div class="invalid-feedback">Password must be at least 6 characters</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Remember me</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Login</button>
+          </div>
+          <div id="loginError" class="login-error">
+            Invalid credentials. Please try again.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">New user? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Register here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">SECURE REGISTRATION</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="registerForm">
+          <div class="mb-3">
+            <label for="regUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="regUsername" required>
+            <div class="invalid-feedback">Username must be 4-20 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" required>
+            <div class="invalid-feedback">Please enter a valid email</div>
+          </div>
+          <div class="mb-3">
+            <label for="regPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="regPassword" required>
+            <div class="invalid-feedback">Password must be at least 8 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regConfirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="regConfirmPassword" required>
+            <div class="invalid-feedback">Passwords must match</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+            <label class="form-check-label" for="termsCheck">I agree to the <a href="#" style="color: var(--neon-cyan);">Terms & Conditions</a></label>
+            <div class="invalid-feedback">You must agree to the terms</div>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Register</button>
+          </div>
+          <div id="registerError" class="register-error">
+            Registration error. Please try again.
+          </div>
+          <div id="registerSuccess" class="register-success">
+            Registration successful! You can now login.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">Already have an account? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#loginModal" data极-bs-dismiss="modal">Login here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const softwareCards = document.querySelectorAll('.software-card');
+        const filterDescriptions = document.querySelectorAll('.filter-description');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        
+        // Filter functionality
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                
+                // Remove active class from all buttons and descriptions
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                filterDescriptions.forEach(desc => desc.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Show the corresponding description
+                document.getElementById(`desc-${filter}`).classList.add('active');
+                
+                // Filter cards
+                softwareCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const categories = card.getAttribute('data-category').split(' ');
+                        if (categories.includes(filter)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            if (searchTerm.length === 0) {
+                searchResults.style.display = 'none';
+                // Reset to all view when search is empty
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('[data-filter="all"]').classList.add('active');
+                filterDescriptions.forEach(desc => desc.classList.remove('active'));
+                document.getElementById('desc-all').classList.add('active');
+                softwareCards.forEach(card => card.style.display = 'flex');
+                return;
+            }
+            
+            // Clear previous results
+            searchResults.innerHTML = '';
+            
+            // Find matching software
+            const matches = [];
+            softwareCards.forEach(card => {
+                const softwareName = card.getAttribute('data-name').toLowerCase();
+                const softwareTitle = card.querySelector('.software-name span').textContent.toLowerCase();
+                
+                if (softwareName.includes(searchTerm) || softwareTitle.includes(searchTerm)) {
+                    matches.push({
+                        name: card.querySelector('.software-name span').textContent,
+                        element: card
+                    });
+                }
+            });
+            
+            // Display results
+            if (matches.length > 0) {
+                matches.forEach(match => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    resultItem.textContent = match.name;
+                    resultItem.addEventListener('click', function() {
+                        // Hide all cards first
+                        softwareCards.forEach(card => card.style.display = 'none');
+                        
+                        // Show only the selected card
+                        match.element.style.display = 'flex';
+                        
+                        // Scroll to the card
+                        match.element.scrollIntoView({ behavior: 'smooth' });
+                        
+                        // Clear search and hide results
+                        searchInput.value = '';
+                        searchResults.style.display = 'none';
+                        
+                        // Update filter buttons
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        document.querySelector('[data-filter="all"]').classList.add('active');
+                        
+                        filterDescriptions.forEach(desc => desc.classList.remove('active'));
+                        document.getElementById('desc-all').classList.add('active');
+                    });
+                    searchResults.appendChild(resultItem);
+                });
+                searchResults.style.display = 'block';
+            } else {
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.textContent = 'No antivirus software found matching your search.';
+                searchResults.appendChild(noResults);
+                searchResults.style.display = 'block';
+            }
+        });
+        
+        // Hide search results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+        
+        // Read more functionality
+        document.querySelectorAll('.read-more').forEach(button => {
+            button.addEventListener('click', function() {
+                const description = this.previousElementSibling;
+                description.classList.toggle('expanded');
+                
+                if (description.classList.contains('expanded')) {
+                    this.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
+                } else {
+                    this.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+                }
+            });
+        });
+        
+        // Form validation
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            
+            // Validate username
+            const username = document.getElementById('username');
+            if (username.value.length < 4) {
+                username.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                username.classList.remove('is-invalid');
+            }
+            
+            // Validate password
+            const password = document.getElementById('password');
+            if (password.value.length < 6) {
+                password.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                password.classList.remove('is-invalid');
+            }
+            
+            if (isValid) {
+                // Simulate login process
+                document.getElementById('loginError').style.display = 'block';
+                // In a real application, you would send the data to a server here
+            }
+        });
+        
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            
+            // Validate username
+            const regUsername = document.getElementById('regUsername');
+            if (regUsername.value.length < 4 || regUsername.value.length > 20) {
+                regUsername.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                regUsername.classList.remove('is-invalid');
+            }
+            
+            // Validate email
+            const regEmail = document.getElementById('regEmail');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(regEmail.value)) {
+                regEmail.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                regEmail.classList.remove('is-invalid');
+            }
+            
+            // Validate password
+            const regPassword = document.getElementById('regPassword');
+            if (regPassword.value.length < 8) {
+                regPassword.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                regPassword.classList.remove('is-invalid');
+            }
+            
+            // Validate confirm password
+            const regConfirmPassword = document.getElementById('regConfirmPassword');
+            if (regConfirmPassword.value !== regPassword.value) {
+                regConfirmPassword.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                regConfirmPassword.classList.remove('is-invalid');
+            }
+            
+            // Validate terms
+            const termsCheck = document.getElementById('termsCheck');
+          if (!termsCheck.checked) {
+                termsCheck.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                termsCheck.classList.remove('is-invalid');
+            }
+            
+            if (isValid) {
+                document.getElementById('registerSuccess').style.display = 'block';
+                document.getElementById('registerError').style.display = 'none';
+                
+                // Simulate successful registration
+                setTimeout(() => {
+                    registerForm.reset();
+                    document.getElementById('registerSuccess').style.display = 'none';
+                    const registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+                    registerModal.hide();
+                    
+                    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                    loginModal.show();
+                }, 2000);
+            } else {
+                document.getElementById('registerError').style.display = 'block';
+            }
+        });
+    });
+</script>
+</body>
+</html>

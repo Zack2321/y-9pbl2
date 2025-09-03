@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASH Cybersecurity</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap');
+    :root {
+      --neon-cyan: #0ff;
+      --neon-pink: #f0f;
+      --neon-purple: #9d00ff;
+      --deep-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+      --text-glow: 0 0 10px #0ff;
+      --pink-glow: 0 0 10px rgba(255, 0, 255, 0.7);
+    }
+    body {
+      font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: white;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.05) 0%, transparent 20%);
+      position: relative;
+    }
+    
+    .scan-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(to bottom, 
+        rgba(0, 255, 255, 0), 
+        rgba(0, 255, 255, 0.8), 
+        rgba(0, 255, 255, 0));
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.9);
+      z-index: 9999;
+      pointer-events: none;
+      animation: scan 6s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes scan {
+      0% { top: -10px; }
+      50% { top: 100%; }
+      100% { top: -10px; }
+    }
+    
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      background: rgba(0, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: float linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+    
+    .navbar {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      z-index: 1000;
+    }
+    .navbar-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+      font-size: 1.8rem;
+      color: var(--neon-cyan) !important;
+      text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 255, 255, 0.5);
+      letter-spacing: 2px;
+      transition: 0.3s;
+      position: relative;
+    }
+    .navbar-brand:hover {
+      text-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.7);
+    }
+    .navbar-brand::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .navbar-brand:hover::after {
+      transform: scaleX(1);
+    }
+    .nav-link {
+      color: #fff !important;
+      margin: 0 12px;
+      position: relative;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 5px 0;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+      transition: 0.4s ease;
+      box-shadow: 0 0 10px var(--neon-cyan), 0 0 10px var(--neon-pink);
+      border-radius: 2px;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .nav-link:hover {
+      color: var(--neon-cyan) !important;
+      text-shadow: var(--text-glow);
+    }
+    
+    .btn-neon {
+      border: 2px solid var(--neon-cyan);
+      background-color: transparent;
+      color: var(--neon-cyan);
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1.5px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+    }
+    .btn-neon:hover {
+      background-color: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 30px var(--neon-cyan), 0 0 60px rgba(0, 255, 255, 0.6);
+      transform: translateY(-3px);
+    }
+    .btn-neon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+      transition: 0.6s;
+    }
+    .btn-neon:hover::before {
+      left: 100%;
+    }
+    
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+      z-index: -1;
+    }
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.8rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.6);
+      margin-bottom: 1.5rem;
+      letter-spacing: 3px;
+      line-height: 1.2;
+      animation: textGlow 2s infinite alternate;
+    }
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 255, 255, 0.5); }
+      100% { text-shadow: 0 0 20px var(--neon-cyan), 0 0 40px rgba(0, 255, 255, 0.8); }
+    }
+    .hero-subtitle {
+      font-size: 1.6rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    .cyber-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 1;
+      opacity: 0.7;
+    }
+    
+    .security-tips {
+      padding: 6rem 0;
+      background: rgba(0, 10, 20, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+    .security-tips::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(0,255,255,0.02)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+      background-size: 50px 50px;
+      opacity: 0.3;
+      z-index: 0;
+    }
+    .tip-card {
+      background: rgba(15, 25, 35, 0.8);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 15px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .tip-card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
+      z-index: -1;
+      border-radius: 16px;
+      opacity: 0;
+      transition: 0.5s;
+    }
+    .tip-card:hover::before {
+      opacity: 1;
+      filter: blur(5px);
+    }
+    .tip-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+      border-color: var(--neon-cyan);
+    }
+    .tip-icon {
+      font-size: 3rem;
+      color: var(--neon-cyan);
+      margin-bottom: 1.5rem;
+      text-shadow: var(--text-glow);
+      transition: 0.3s;
+    }
+    .tip-card:hover .tip-icon {
+      transform: scale(1.1);
+      color: var(--neon-pink);
+      text-shadow: var(--pink-glow);
+    }
+    .tip-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      position: relative;
+      display: inline-block;
+    }
+    .tip-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--neon-cyan);
+      transition: 0.4s;
+    }
+    .tip-card:hover .tip-title::after {
+      width: 100%;
+      background: var(--neon-pink);
+    }
+    .tip-card p {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .antivirus-list {
+      list-style-type: none;
+      padding: 0;
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
+      column-gap: 2rem;
+    }
+    .antivirus-list li {
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 2rem;
+      transition: 0.3s;
+    }
+    .antivirus-list li:hover {
+      color: var(--neon-cyan);
+      transform: translateX(5px);
+    }
+    .antivirus-list li::before {
+      content: "▹";
+      color: var(--neon-cyan);
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+    .antivirus-list li:hover::before {
+      color: var(--neon-pink);
+      transform: scale(1.3);
+    }
+    
+    .about-section {
+      padding: 6rem 0;
+      background: rgba(10, 0, 20, 0.8);
+      position: relative;
+    }
+    .about-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      box-shadow: 0 0 20px var(--neon-cyan);
+    }
+    .feature-img {
+      border-radius: 15px;
+      border: 2px solid rgba(0, 255, 255, 0.4);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      max-width: 100%;
+      height: auto;
+      transition: 0.5s;
+      position: relative;
+      z-index: 1;
+    }
+    .feature-img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+      border-color: var(--neon-pink);
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 15px #0ff;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+      box-shadow: 0 0 15px var(--neon-cyan);
+      border-radius: 2px;
+    }
+    .content-block {
+      margin-bottom: 4rem;
+    }
+    
+    .cyber-pulse {
+      animation: pulse 3s infinite alternate;
+      position: relative;
+    }
+    @keyframes pulse {
+      0% { 
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        transform: scale(1);
+      }
+      100% { 
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.9), 0 0 60px rgba(0, 255, 255, 0.3);
+        transform: scale(1.02);
+      }
+    }
+    
+    .stat-card {
+      background: rgba(20, 30, 40, 0.8);
+      border-radius: 15px;
+      padding: 2.5rem;
+      text-align: center;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    .stat-card:hover::before {
+      transform: scaleX(1);
+    }
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 255, 255, 0.3);
+    }
+    .stat-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      color: var(--neon-cyan);
+      margin-bottom: 0.5rem;
+      text-shadow: var(--text-glow);
+    }
+    .stat-label {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      letter-spacing: 1px;
+    }
+
+    /* Modal styles */
+    .modal-content {
+      background-color: rgba(10, 20, 30, 0.95);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      color: white;
+    }
+    .modal-header {
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    }
+    .modal-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px var(--neon-cyan);
+    }
+    .btn-close {
+      filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);
+    }
+    .form-control {
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      color: white;
+    }
+    .form-control:focus {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      color: white;
+    }
+    .form-label {
+      color: var(--neon-cyan);
+    }
+    .login-error {
+      color: #ff6b6b;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    /* New Interactive Security Checker */
+    .security-checker {
+      background: rgba(15, 25, 35, 0.9);
+      border-radius: 15px;
+      padding: 2rem;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+      margin-bottom: 3rem;
+    }
+    .checker-question {
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+    .checker-question.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    .checker-progress {
+      height: 5px;
+      background: rgba(0, 255, 255, 0.2);
+      margin-bottom: 2rem;
+      border-radius: 5px;
+    }
+    .checker-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+      border-radius: 5px;
+      transition: width 0.5s ease;
+    }
+    .checker-option {
+      display: block;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .checker-option:hover {
+      background: rgba(0, 255, 255, 0.1);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+    .checker-result {
+      display: none;
+      padding: 2rem;
+      background: rgba(0, 20, 30, 0.8);
+      border-radius: 10px;
+      border-left: 5px solid var(--neon-cyan);
+    }
+    .result-score {
+      font-size: 2.5rem;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      margin-bottom: 1rem;
+    }
+    .result-badge {
+      display: inline-block;
+      padding: 5px 15px;
+      background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink));
+      color: white;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 15px rgba(157, 0, 255, 0.5);
+    }
+    
+    /* Threat Map Section */
+    .threat-map-container {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+      margin-bottom: 3rem;
+    }
+    .threat-map-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem;
+    }
+    .threat-stats {
+      display: flex;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+    .threat-stat {
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .threat-stat-value {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .threat-stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    /* News/Blog Section */
+    .news-section {
+      padding: 6rem 0;
+      background: rgba(10, 15, 25, 0.8);
+    }
+    .news-card {
+      background: rgba(20, 30, 40, 0.8);
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      transition: all 0.4s ease;
+      margin-bottom: 2rem;
+      height: 100%;
+    }
+    .news-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 255, 255, 0.3);
+      border-color: var(--neon-cyan);
+    }
+    .news-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    }
+    .news-body {
+      padding: 1.5rem;
+    }
+    .news-date {
+      color: var(--neon-cyan);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .news-title {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    .news-excerpt {
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+    .news-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      background: rgba(0, 255, 255, 0.2);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+    
+    /* Dark Web Scanner */
+    .darkweb-scanner {
+      background: rgba(15, 0, 30, 0.8);
+      border-radius: 15px;
+      padding: 2rem;
+      border: 1px solid rgba(157, 0, 255, 0.5);
+      box-shadow: 0 0 30px rgba(157, 0, 255, 0.2);
+      margin-bottom: 3rem;
+    }
+    .scanner-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .scanner-input {
+      flex-grow: 1;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(157, 0, 255, 0.5);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+    .scanner-input:focus {
+      outline: none;
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+    }
+    .scanner-result {
+      display: none;
+      padding: 1.5rem;
+      background: rgba(30, 0, 50, 0.6);
+      border-radius: 10px;
+      margin-top: 1.5rem;
+      border-left: 5px solid var(--neon-pink);
+    }
+    .breach-item {
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      border-left: 3px solid #ff6b6b;
+    }
+    .breach-name {
+      color: #ff6b6b;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+      padding: 6rem 0;
+      background: rgba(0, 10, 20, 0.8);
+    }
+    .faq-item {
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 1.5rem;
+      background: rgba(0, 20, 30, 0.5);
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .faq-question:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      font-size: 1.5rem;
+    }
+    .faq-question.active::after {
+      content: '-';
+    }
+    .faq-answer {
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-answer.show {
+      padding: 1.5rem;
+      max-height: 500px;
+    }
+    
+    /* Emergency Section */
+    .emergency-section {
+      padding: 6rem 0;
+      background: rgba(50, 0, 0, 0.7);
+      position: relative;
+    }
+    .emergency-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="5" height="5" x="0" y="0" fill="rgba(255,0,0,0.1)"/></svg>');
+      background-size: 20px 20px;
+      opacity: 0.3;
+      z-index: 0;
+    }
+    .emergency-card {
+      background: rgba(30, 0, 0, 0.8);
+      border-radius: 15px;
+      padding: 2rem;
+      border: 1px solid #ff6b6b;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 2rem;
+    }
+    .emergency-title {
+      color: #ff6b6b;
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    .emergency-step {
+      margin-bottom: 1.5rem;
+      padding-left: 2rem;
+      position: relative;
+    }
+    .emergency-step::before {
+      content: '!';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: #ff6b6b;
+      color: black;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    /* Badges/Achievements */
+    .badge-section {
+      padding: 6rem 0;
+      background: rgba(0, 20, 30, 0.8);
+    }
+    .badge-card {
+      background: rgba(0, 30, 40, 0.8);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      transition: all 0.4s ease;
+      margin-bottom: 2rem;
+    }
+    .badge-icon {
+      font-size: 3rem;
+      color: var(--neon-cyan);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 15px var(--neon-cyan);
+    }
+    .badge-title {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    .badge-desc {
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+    .badge-progress {
+      height: 5px;
+      background: rgba(0, 255, 255, 0.2);
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+    .badge-progress-bar {
+      height: 100%;
+      background: var(--neon-cyan);
+      border-radius: 5px;
+      transition: width 0.5s ease;
+    }
+    .badge-locked {
+      filter: grayscale(100%);
+      opacity: 0.6;
+    }
+    
+    /* Forum Preview */
+    .forum-section {
+      padding: 6rem 0;
+      background: rgba(10, 15, 25, 0.8);
+    }
+    .forum-post {
+      background: rgba(20, 30, 40, 0.8);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+    .forum-post:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+    }
+    .forum-user {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .forum-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--neon-purple);
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+    }
+    .forum-username {
+      font-weight: bold;
+      color: var(--neon-cyan);
+    }
+    .forum-post-time {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+    .forum-post-title {
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    .forum-post-excerpt {
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+    .forum-post-stats {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+    .forum-stat {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    @media (max-width: 992px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+      .hero-subtitle {
+        font-size: 1.3rem;
+      }
+      .section-title {
+        font-size: 2.2rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .antivirus-list {
+        columns: 1;
+        -webkit-columns: 1;
+        -moz-columns: 1;
+      }
+      .tip-card {
+        padding: 1.5rem;
+      }
+      .scanner-form {
+        flex-direction: column;
+      }
+      .threat-stats {
+        flex-wrap: wrap;
+      }
+      .threat-stat {
+        width: 50%;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="scan-line"></div>
+<div class="particles" id="particles-js"></div>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="bi bi-shield-lock me-2"></i>ASH</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cyberNavbar" aria-controls="cyberNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="color: #0ff; filter: drop-shadow(0 0 5px #0ff);"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="cyberNavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="downloadDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Download
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="downloadDropdown">
+            <li><a class="dropdown-item" href="#">Bitdefender</a></li>
+            <li><a class="dropdown-item" href="#">Kaspersky</a></li>
+            <li><a class="dropdown-item" href="#">Norton</a></li>
+            <li><a class="dropdown-item" href="#">McAfee</a></li>
+            <li><a class="dropdown-item" href="#">Avast</a></li>
+            <li><a class="dropdown-item" href="#">ESET</a></li>
+            <li><a class="dropdown-item" href="#">Trend Micro</a></li>
+            <li><a class="dropdown-item" href="#">Sophos</a></li>
+            <li><a class="dropdown-item" href="#">AVG</a></li>
+            <li><a class="dropdown-item" href="#">Malwarebytes</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">View All</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+      </ul>
+      <button class="btn btn-neon" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="bi bi-shield-check me-2"></i>Sign in</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">SECURE LOGIN</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Submit</button>
+          </div>
+          <div id="loginError" class="login-error">
+            Invalid credentials. Please try again.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">New user? <a href="#" style="color: var(--neon-cyan);">Register here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="hero-section">
+  <div class="cyber-grid"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">PROTECT YOUR DIGITAL LIFE</h1>
+    <p class="hero-subtitle">Learn how to safeguard your devices against hackers with cutting-edge cybersecurity solutions and comprehensive digital protection strategies for the modern age.</p>
+    <div class="d-flex justify-content-center gap-3">
+      <a href="#tips" class="btn btn-neon">Security Tips</a>
+      <a href="#antivirus" class="btn btn-neon">Top Antivirus</a>
+    </div>
+  </div>
+</section>
+
+<section id="tips" class="security-tips">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">How To Prevent Hackers From Accessing Your Device</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="tip-card">
+          <div class="tip-icon"><i class="bi bi-key-fill"></i></div>
+          <h3 class="tip-title">Strong Passwords</h3>
+          <p>In today's digital landscape, strong passwords are your first line of defense against unauthorized access. Cybersecurity experts recommend passwords with at least 12 characters that combine uppercase and lowercase letters, numbers, and special symbols.</p>
+          <p>Avoid using dictionary words, personal information like birthdays, or simple patterns. Each password should be unique to its account to prevent credential stuffing attacks where hackers try known passwords across multiple sites.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="tip-card">
+          <div class="tip-icon"><i class="bi bi-arrow-repeat"></i></div>
+          <h3 class="tip-title">Regular Updates</h3>
+          <p>Software vulnerabilities are discovered daily, and updates often contain critical security patches. Enable automatic updates for your operating system, web browsers, and all installed applications to ensure you're protected against the latest threats.</p>
+          <p>Outdated software is one of the most common attack vectors. Hackers exploit known vulnerabilities that have already been fixed in newer versions. This includes not just your computer's OS, but also smartphone apps, IoT devices, and even your router's firmware.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="tip-card">
+          <div class="tip-icon"><i class="bi bi-shield-check"></i></div>
+          <h3 class="tip-title">Antivirus Protection</h3>
+          <p>Modern antivirus solutions offer much more than just virus scanning. They provide real-time protection against zero-day exploits, ransomware, spyware, and phishing attempts. Look for solutions with behavior-based detection that can identify new, previously unknown threats.</p>
+          <p>Premium antivirus packages often include additional features like firewalls, secure browsing tools, password managers, and VPN services. These integrated solutions provide comprehensive protection across all aspects of your digital life.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Security Checker Section -->
+<section class="security-tips">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Security Self-Assessment</h2>
+    <div class="security-checker">
+      <div class="checker-progress">
+        <div class="checker-progress-bar" style="width: 0%"></div>
+      </div>
+      
+      <div class="checker-question active" data-question="1">
+        <h3 class="tip-title">1. How often do you update your software and operating system?</h3>
+        <div class="checker-option" data-value="4">Automatically as soon as updates are available</div>
+        <div class="checker-option" data-value="3">Manually within a week of release</div>
+        <div class="checker-option" data-value="2">Only when I remember to do it</div>
+        <div class="checker-option" data-value="1">Rarely or never</div>
+      </div>
+      
+      <div class="checker-question" data-question="2">
+        <h3 class="tip-title">2. What best describes your password habits?</h3>
+        <div class="checker-option" data-value="4">Unique strong passwords for every account, managed with a password manager</div>
+        <div class="checker-option" data-value="3">Strong passwords but some reuse across less important sites</div>
+        <div class="checker-option" data-value="2">Moderate passwords with significant reuse</div>
+        <div class="checker-option" data-value="1">Simple passwords that are easy to remember</div>
+      </div>
+      
+      <div class="checker-question" data-question="3">
+        <h3 class="tip-title">3. Do you use two-factor authentication (2FA)?</h3>
+        <div class="checker-option" data-value="4">On all accounts that support it, using an authenticator app or hardware key</div>
+        <div class="checker-option" data-value="3">On important accounts via SMS or email</div>
+        <div class="checker-option" data-value="2">Only on a few critical accounts</div>
+        <div class="checker-option" data-value="1">I don't use 2FA</div>
+      </div>
+      
+      <div class="checker-question" data-question="4">
+        <h3 class="tip-title">4. How do you handle email attachments and links?</h3>
+        <div class="checker-option" data-value="4">Never open unexpected attachments, verify sender first, hover to check links</div>
+        <div class="checker-option" data-value="3">Usually cautious but might open if it looks important</div>
+        <div class="checker-option" data-value="2">Open if it seems relevant to my work/interests</div>
+        <div class="checker-option" data-value="1">Open most attachments and click links without much thought</div>
+      </div>
+      
+      <div class="checker-question" data-question="5">
+        <h3 class="tip-title">5. What security software do you use?</h3>
+        <div class="checker-option" data-value="4">Premium antivirus + firewall + VPN + additional security tools</div>
+        <div class="checker-option" data-value="3">Standard antivirus with some additional protections</div>
+        <div class="checker-option" data-value="2">Basic free antivirus only</div>
+        <div class="checker-option" data-value="1">No security software</div>
+      </div>
+      
+      <div class="checker-result">
+        <div class="result-score">Your Score: <span id="finalScore">0</span>/20</div>
+        <div class="result-badge" id="resultBadge">SECURITY LEVEL</div>
+        <div id="resultFeedback"></div>
+        <button class="btn btn-neon mt-3" id="restartChecker">Retake Assessment</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Threat Map Section -->
+<section class="security-tips">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Global Threat Activity</h2>
+    <div class="threat-map-container">
+      <img src="https://cybermap.kaspersky.com/images/cybermap2.jpg" alt="Live Cyber Threat Map" class="img-fluid">
+      <div class="threat-map-overlay">
+        <div></div> <!-- Empty div for spacing -->
+        <div class="threat-stats">
+          <div class="threat-stat">
+            <div class="threat-stat-value" id="attacksCount">4,281,459</div>
+            <div class="threat-stat-label">ATTACKS TODAY</div>
+          </div>
+          <div class="threat-stat">
+            <div class="threat-stat-value" id="malwareCount">892,456</div>
+            <div class="threat-stat-label">MALWARE FOUND</div>
+          </div>
+          <div class="threat-stat">
+            <div class="threat-stat-value" id="countriesCount">187</div>
+            <div class="threat-stat-label">COUNTRIES AFFECTED</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center mt-3">This simulated threat map shows the scale of global cyber attacks in real-time. Actual numbers are constantly updating.</p>
+  </div>
+</section>
+
+<!-- News/Blog Section -->
+<section class="news-section">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Latest Security News</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="news-card">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="news-img" alt="Ransomware Attack">
+          <div class="news-body">
+            <div class="news-date">June 15, 2023</div>
+            <h3 class="news-title">Global Ransomware Surge</h3>
+            <p class="news-excerpt">New ransomware variants are targeting healthcare systems worldwide, with attacks up 78% this quarter.</p>
+            <div>
+              <span class="news-tag">Ransomware</span>
+              <span class="news-tag">Healthcare</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="news-card">
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="news-img" alt="Phishing Scam">
+          <div class="news-body">
+            <div class="news-date">June 12, 2023</div>
+            <h3 class="news-title">AI-Powered Phishing</h3>
+            <p class="news-excerpt">Cybercriminals are now using ChatGPT to create highly personalized phishing emails that bypass traditional filters.</p>
+            <div>
+              <span class="news-tag">Phishing</span>
+              <span class="news-tag">AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="news-card">
+          <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="news-img" alt="Zero Day">
+          <div class="news-body">
+            <div class="news-date">June 8, 2023</div>
+            <h3 class="news-title">Critical Windows Zero-Day</h3>
+            <p class="news-excerpt">Microsoft warns of actively exploited vulnerability allowing system takeover - patch immediately.</p>
+            <div>
+              <span class="news-tag">Zero-Day</span>
+              <span class="news-tag">Windows</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="#" class="btn btn-neon">View All News</a>
+    </div>
+  </div>
+</section>
+
+<section id="cyber-threats" class="security-tips">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Understanding Cyber Threats</h2>
+    <div class="row align-items-center content-block">
+      <div class="col-md-6">
+        <h3 class="tip-title">The Evolving Threat Landscape</h3>
+        <p>Cyber threats have become increasingly sophisticated, targeting individuals, businesses, and governments alike. Understanding these threats is the first step in protecting yourself against them.</p>
+        <p>Modern cybercriminals employ advanced techniques like artificial intelligence to automate attacks, polymorphic malware that changes its code to evade detection, and social engineering tactics that manipulate human psychology.</p>
+        <p>Some of the most dangerous current threats include:</p>
+        <ul class="antivirus-list">
+          <li><strong>Advanced Persistent Threats (APTs):</strong> Long-term targeted attacks often sponsored by nation-states</li>
+          <li><strong>Fileless Malware:</strong> Attacks that operate in memory without leaving files on disk</li>
+          <li><strong>Supply Chain Attacks:</strong> Compromising software vendors to distribute malware</li>
+          <li><strong>Zero-Day Exploits:</strong> Attacks targeting vulnerabilities before patches are available</li>
+          <li><strong>AI-Powered Attacks:</strong> Using machine learning to create more effective phishing</li>
+          <li><strong>Cryptojacking:</strong> Unauthorized use of devices to mine cryptocurrency</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <img src="cybersec.jpeg" style="width: 900px;" alt="Cyber Threats" class="feature-img cyber-pulse">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dark Web Scanner Section -->
+<section class="security-tips">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Dark Web Exposure Check</h2>
+    <div class="darkweb-scanner">
+      <h3 class="tip-title">Check if your credentials have been compromised</h3>
+      <p>Our scanner checks known data breaches to see if your email or passwords have been exposed on the dark web.</p>
+      
+      <div class="scanner-form">
+        <input type="email" class="scanner-input" placeholder="Enter your email address" id="darkwebEmail">
+        <button class="btn btn-neon" id="scanDarkweb">Scan Now</button>
+      </div>
+      
+      <div class="scanner-result" id="darkwebResult">
+        <h4>Scan Results for <span id="scannedEmail"></span></h4>
+        <div id="breachResults"></div>
+        <div class="mt-3">
+          <p>If any breaches were found, you should:</p>
+          <ul>
+            <li>Immediately change passwords for affected accounts</li>
+            <li>Enable two-factor authentication where available</li>
+            <li>Watch for suspicious activity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section  class="security-tips">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Our Mission</h2>
+    <div class="row align-items-center content-block">
+      <div class="col-md-6">
+        <img src="cyber.png" alt="Antivirus protection" class="feature-img cyber-pulse">
+      </div>
+      <div class="col-md-6">
+         <h3 class="tip-title">Our Mission at ASH</h3>
+        <p>ASH is dedicated to providing the latest information and tools to protect individuals and businesses from cyber threats. Our team of security experts continuously monitors the threat landscape to bring you up-to-date protection strategies.</p>
+        <p>We believe cybersecurity should be accessible to everyone, not just IT professionals. That's why we provide clear, actionable advice and recommend trusted security solutions to keep your digital life safe. Our content is regularly reviewed by certified cybersecurity professionals to ensure accuracy and relevance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+      <div class="faq-question">What's the most important security measure I should take?</div>
+      <div class="faq-answer">
+        <p>While there are many important security practices, enabling two-factor authentication (2FA) on all important accounts provides the most significant immediate improvement to your security. Combine this with using a password manager to create and store unique, strong passwords for each account.</p>
+      </div>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question">How can I tell if my computer has been hacked?</div>
+      <div class="faq-answer">
+        <p>Signs of a compromised system include: unexpected slowdowns, strange pop-ups, programs opening/closing by themselves, changed passwords you didn't modify, unfamiliar programs running, or unusual network activity. If you suspect hacking, disconnect from the internet immediately and run a full antivirus scan.</p>
+      </div>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question">Is free antivirus software good enough?</div>
+      <div class="faq-answer">
+        <p>Free antivirus provides basic protection but typically lacks important features like real-time behavioral analysis, ransomware protection, firewalls, and phishing prevention. For comprehensive security, especially if you handle sensitive data, a paid solution is recommended. However, a free antivirus is much better than no protection at all.</p>
+      </div>
+    </div>
+    
+    <div class="faq-item">
+      <div class="faq-question">How often should I change my passwords?</div>
+      <div class="faq-answer">
+        <p>Current best practices recommend changing passwords only when there's reason to believe they may be compromised (like after a breach). Instead of frequent changes, focus on creating long, unique passwords for each account and protecting them with 2FA. Frequent password changes often lead to weaker passwords or minor variations that are easy to guess.</p>
+      </div>
+    </div>
+    
+    <div class="text-center mt-4">
+      <a href="#" class="btn btn-neon">View Full FAQ</a>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about-section">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Top anti webstie</h2>
+    
+    <div class="row align-items-center content-block">
+      <div class="col-md-6">
+        <h3 class="tip-title" id="antivirus">Protection Solutions</h3>
+        <p>The antivirus market has evolved significantly from simple virus scanners to complete endpoint protection platforms. Modern solutions incorporate machine learning to detect never-before-seen malware, behavioral analysis to stop zero-day attacks, and cloud-assisted scanning for real-time threat intelligence.</p>
+        <p>When evaluating antivirus software, consider factors beyond detection rates. System impact is crucial - some solutions slow down computers noticeably during scans. Look for products with minimal performance impact that offer silent/gaming modes when you need full system resources.</p>
+        <p>Our recommended antivirus solutions include:</p>
+        <ul class="antivirus-list">
+          <li>Bitdefender - Comprehensive protection with minimal system impact</li>
+          <li>Kaspersky - Advanced threat detection with excellent malware removal</li>
+          <li>Norton - Feature-rich with strong phishing protection</li>
+          <li>McAfee - Good for multi-device households</li>
+          <li>Avast - Free version available with solid protection</li>
+          <li>ESET - Lightweight with excellent detection rates</li>
+          <li>Trend Micro - Strong ransomware protection</li>
+          <li>Sophos - Excellent for business and home use</li>
+          <li>AVG - Good free option with essential protection</li>
+          <li>Malwarebytes - Specializes in malware removal</li>
+      </div>
+      <div class="col-md-6">
+        <img src="Cybersecurity-solutions.jpeg" alt="Cybersecurity" class="feature-img cyber-pulse">
+      </div>
+    </div>
+    
+    <div class="row align-items-center content-block mt-5">
+      <div class="col-md-6">
+        <img src="cybersecurity.H.jpg" alt="Cyber Defense" class="feature-img">
+      </div>
+      <div class="col-md-6">
+        <h3 class="tip-title">Join Our Community</h3>
+        <p>Stay informed about the latest threats and protection strategies by joining our community. We offer regular security bulletins, webinars with cybersecurity experts, and early access to new protection tools.</p>
+        <p>Members of our community gain access to exclusive resources including security checklists, incident response templates, and discounts on premium security software. Together, we can build a safer digital world.</p>
+        <button class="btn btn-neon mt-3" data-bs-toggle="modal" data-bs-target="#loginModal">Join Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Emergency Response Section -->
+<section class="emergency-section">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Emergency Response</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="emergency-card">
+          <h3 class="emergency-title">I'VE BEEN HACKED - WHAT NOW?</h3>
+          <div class="emergency-step">Disconnect your device from the internet immediately</div>
+          <div class="emergency-step">Change all passwords from a clean device</div>
+          <div class="emergency-step">Run a full antivirus scan in safe mode</div>
+          <div class="emergency-step">Check for unauthorized transactions or changes</div>
+          <div class="emergency-step">Notify relevant institutions (banks, email provider)</div>
+          <div class="emergency-step">Consider freezing your credit if financial data was exposed</div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="emergency-card">
+          <h3 class="emergency-title">RANSOMWARE ATTACK</h3>
+          <div class="emergency-step">Isolate the infected device immediately</div>
+          <div class="emergency-step">Do NOT pay the ransom - it doesn't guarantee recovery</div>
+          <div class="emergency-step">Check for available decryptors at nomoreransom.org</div>
+          <div class="emergency-step">Restore from clean backups after removing malware</div>
+          <div class="emergency-step">Report the attack to authorities</div>
+          <div class="emergency-step">Conduct a full security audit to find the breach point</div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <p>For immediate assistance, call our 24/7 response line: <strong style="color: #ff6b6b;">1-888-ASH-HELP</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- Badges/Achievements Section -->
+<section class="badge-section">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Security Achievements</h2>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="badge-card">
+          <div class="badge-icon"><i class="bi bi-shield-check"></i></div>
+          <h3 class="badge-title">Basic Protection</h3>
+          <p class="badge-desc">Completed basic security setup</p>
+          <div class="badge-progress">
+            <div class="badge-progress-bar" style="width: 100%"></div>
+          </div>
+          <div class="text-success">EARNED</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="badge-card">
+          <div class="badge-icon"><i class="bi bi-lock-fill"></i></div>
+          <h3 class="badge-title">Password Master</h3>
+          <p class="badge-desc">Secured all accounts with strong passwords</p>
+          <div class="badge-progress">
+            <div class="badge-progress-bar" style="width: 65%"></div>
+          </div>
+          <div>65% Complete</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="badge-card badge-locked">
+          <div class="badge-icon"><i class="bi bi-phone-vibrate"></i></div>
+          <h3 class="badge-title">2FA Champion</h3>
+          <p class="badge-desc">Enabled 2FA on all supported accounts</p>
+          <div class="badge-progress">
+            <div class="badge-progress-bar" style="width: 0%"></div>
+          </div>
+          <div>LOCKED</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="badge-card">
+          <div class="badge-icon"><i class="bi bi-robot"></i></div>
+          <h3 class="badge-title">Phishing Expert</h3>
+          <p class="badge-desc">Completed anti-phishing training</p>
+          <div class="badge-progress">
+            <div class="badge-progress-bar" style="width: 30%"></div>
+          </div>
+          <div>30% Complete</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Forum Preview Section -->
+<section class="forum-section">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Community Forum</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="forum-post">
+          <div class="forum-user">
+            <div class="forum-avatar">JD</div>
+            <div>
+              <div class="forum-username">JohnDoe42</div>
+              <div class="forum-post-time">2 hours ago</div>
+            </div>
+          </div>
+          <h3 class="forum-post-title">Best VPN for privacy in 2023?</h3>
+          <p class="forum-post-excerpt">Looking for recommendations for a no-logs VPN with good speeds. Currently considering Mullvad or ProtonVPN but open to suggestions...</p>
+          <div class="forum-post-stats">
+            <div class="forum-stat"><i class="bi bi-chat-square-text"></i> 14 replies</div>
+            <div class="forum-stat"><i class="bi bi-eye"></i> 256 views</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="forum-post">
+          <div class="forum-user">
+            <div class="forum-avatar">SC</div>
+            <div>
+              <div class="forum-username">SecureCat</div>
+              <div class="forum-post-time">5 hours ago</div>
+            </div>
+          </div>
+          <h3 class="forum-post-title">Just avoided a phishing attempt</h3>
+          <p class="forum-post-excerpt">Got an email pretending to be from my bank with a link to "verify my account." Almost clicked before noticing the sender address was off by one letter...</p>
+          <div class="forum-post-stats">
+            <div class="forum-stat"><i class="bi bi-chat-square-text"></i> 8 replies</div>
+            <div class="forum-stat"><i class="bi bi-eye"></i> 189 views</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="#" class="btn btn-neon">Join the Discussion</a>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const particlesContainer = document.getElementById('particles-js');
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      const size = Math.random() * 5 + 1;
+      const posX = Math.random() * 100;
+      const posY = Math.random() * 100;
+      const duration = Math.random() * 20 + 10;
+      const delay = Math.random() * 10;
+      const opacity = Math.random() * 0.5 + 0.1;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}%`;
+      particle.style.top = `${posY}%`;
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `-${delay}s`;
+      particle.style.opacity = opacity;
+      
+      particlesContainer.appendChild(particle);
+    }
+
+    // Interactive Security Checker
+    const questions = document.querySelectorAll('.checker-question');
+    const progressBar = document.querySelector('.checker-progress-bar');
+    const resultSection = document.querySelector('.checker-result');
+    const finalScore = document.getElementById('finalScore');
+    const resultBadge = document.getElementById('resultBadge');
+    const resultFeedback = document.getElementById('resultFeedback');
+    const restartBtn = document.getElementById('restartChecker');
+    
+    let currentQuestion = 1;
+    let totalScore = 0;
+    
+    // Handle option selection
+    document.querySelectorAll('.checker-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const value = parseInt(this.getAttribute('data-value'));
+        totalScore += value;
+        
+        // Move to next question or show results
+        if (currentQuestion < questions.length) {
+          document.querySelector(`.checker-question[data-question="${currentQuestion}"]`).classList.remove('active');
+          currentQuestion++;
+          document.querySelector(`.checker-question[data-question="${currentQuestion}"]`).classList.add('active');
+          progressBar.style.width = `${(currentQuestion / questions.length) * 100}%`;
+        } else {
+          // Show results
+          document.querySelector('.checker-question.active').classList.remove('active');
+          resultSection.style.display = 'block';
+          finalScore.textContent = totalScore;
+          
+          // Determine badge and feedback
+          if (totalScore >= 18) {
+            resultBadge.textContent = 'SECURITY EXPERT';
+            resultBadge.style.background = 'linear-gradient(90deg, #00ff00, #00cc00)';
+            resultFeedback.innerHTML = '<p>Excellent! You have strong security habits that protect you from most threats. Keep staying vigilant and consider sharing your knowledge with others.</p>';
+          } else if (totalScore >= 12) {
+            resultBadge.textContent = 'SECURITY AWARE';
+            resultBadge.style.background = 'linear-gradient(90deg, var(--neon-cyan), #00aacc)';
+            resultFeedback.innerHTML = '<p>Good job! You have decent security practices but there\'s room for improvement. Check our tips section to enhance your protection.</p>';
+          } else {
+            resultBadge.textContent = 'AT RISK';
+            resultBadge.style.background = 'linear-gradient(90deg, #ff6b6b, #cc0000)';
+            resultFeedback.innerHTML = '<p>Your security practices need immediate attention. You\'re vulnerable to common attacks. Follow our recommendations to significantly improve your protection.</p>';
+          }
+        }
+      });
+    });
+    
+    // Restart checker
+    restartBtn.addEventListener('click', function() {
+      currentQuestion = 1;
+      totalScore = 0;
+      resultSection.style.display = 'none';
+      document.querySelectorAll('.checker-question').forEach(q => q.classList.remove('active'));
+      document.querySelector('.checker-question[data-question="1"]').classList.add('active');
+      progressBar.style.width = '0%';
+    });
+    
+    // Dark Web Scanner - Now with actual API integration
+    const darkwebBtn = document.getElementById('scanDarkweb');
+    const darkwebResult = document.getElementById('darkwebResult');
+    const scannedEmail = document.getElementById('scannedEmail');
+    const breachResults = document.getElementById('breachResults');
+    
+    darkwebBtn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('darkwebEmail').value.trim();
+      
+      if (!email) {
+        alert('Please enter a valid email address');
+        return;
+      }
+      
+      // Validate email format
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Please enter a valid email address');
+        return;
+      }
+      
+      try {
+        // Show loading state
+        darkwebBtn.disabled = true;
+        darkwebBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Scanning...';
+        
+        // Using a CORS proxy to access Have I Been Pwned API
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        const apiUrl = `https://haveibeenpwned.com/api/v3/breachedaccount/${encodeURIComponent(email)}?truncateResponse=false`;
+        
+        const response = await fetch(proxyUrl + apiUrl, {
+          headers: {
+            'hibp-api-key': 'your-api-key-here', // You should get your own API key from HIBP
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('API request failed');
+        }
+        
+        const breaches = await response.json();
+        
+        // Display results
+        scannedEmail.textContent = email;
+        breachResults.innerHTML = '';
+        
+        if (breaches.length > 0) {
+          breachResults.innerHTML = `
+            <div class="alert alert-danger">
+              <i class="bi bi-exclamation-triangle-fill"></i> Found in ${breaches.length} data breach${breaches.length > 1 ? 'es' : ''}
+            </div>
+          `;
+          
+          breaches.forEach(breach => {
+            breachResults.innerHTML += `
+              <div class="breach-item">
+                <div class="breach-name">${breach.Name}</div>
+                <div><strong>Date:</strong> ${breach.BreachDate}</div>
+                <div><strong>Compromised data:</strong> ${breach.DataClasses.join(', ')}</div>
+                <div><a href="https://haveibeenpwned.com/breach/${breach.Name}" target="_blank" style="color: var(--neon-cyan);">More details</a></div>
+              </div>
+            `;
+          });
+        } else {
+          breachResults.innerHTML = `
+            <div class="alert alert-success">
+              <i class="bi bi-check-circle-fill"></i> No known breaches found for this email
+            </div>
+            <p>This email hasn't been found in any of the major breaches we track. However, we recommend always using unique passwords and enabling 2FA for important accounts.</p>
+          `;
+        }
+        
+        darkwebResult.style.display = 'block';
+      } catch (error) {
+        console.error('Error checking breaches:', error);
+        breachResults.innerHTML = `
+          <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle-fill"></i> Error checking breaches. Please try again later.
+          </div>
+        `;
+        darkwebResult.style.display = 'block';
+      } finally {
+        darkwebBtn.disabled = false;
+        darkwebBtn.textContent = 'Scan Now';
+      }
+    });
+    
+    // FAQ Accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        question.classList.toggle('active');
+        const answer = question.nextElementSibling;
+        answer.classList.toggle('show');
+      });
+    });
+    
+    // Animate threat stats
+    function animateValue(id, start, end, duration) {
+      const obj = document.getElementById(id);
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        obj.innerHTML = numberWithCommas(value);
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+    
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    // Start animations when scrolled into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.id === 'attacksCount') {
+            animateValue('attacksCount', 0, 4281459, 2000);
+            animateValue('malwareCount', 0, 892456, 2000);
+            animateValue('countriesCount', 0, 187, 2000);
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    observer.observe(document.getElementById('attacksCount'));
+  });
+</script>
+</body>
+</html>

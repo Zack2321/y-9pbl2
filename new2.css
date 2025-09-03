@@ -1,0 +1,96 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #262525;
+  margin: 0;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: aqua;
+  margin-bottom: 10px;
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background-color: #00143a;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-box {
+  width: 40%;
+  background-color: #00a99d;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  margin: 40px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.4s ease-in-out;
+}
+
+    .timeline-box:hover {
+      background: #d400ff;
+      color: white;
+      transform: translateX(10px); /* smooth shift */
+    }
+
+.timeline-box.left {
+  left: 0;
+  text-align: right;
+  margin-right: 60%;
+  transition: all 0.4s ease-in-out;
+}
+
+.timeline-box.right {
+  left: 60%;
+  text-align: left;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Hidden before appearing */
+.hidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* When in view, show */
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Highlight Button */
+.highlight-button {
+  background-color: #00143a;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  margin-top: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 2;
+  position: relative;
+}
+
+.highlight-button:hover {
+  background-color: #003366;
+}

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Policy Modal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            color: #00ffff;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: #fff;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #00ffff;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .modal-btn {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            border: 1px solid #00ffff;
+            padding: 18px 35px;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .modal-btn:hover {
+            background: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 25px;
+            width: 280px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: #00ffff;
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            color: #00ffff;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: #111;
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            animation: modalFade 0.4s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes modalFade {
+            from {
+                opacity: 0;
+                transform: translateY(-60px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .modal-header {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 20px;
+            border-bottom: 2px solid #00ffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+        }
+        
+        .modal-title {
+            color: #00ffff;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: #00ffff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-btn:hover {
+            transform: rotate(90deg);
+            color: #fff;
+            background: rgba(0, 255, 255, 0.2);
+        }
+        
+        .modal-body {
+            padding: 25px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        
+        .modal-body h2 {
+            color: #00ffff;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #00ffff;
+        }
+        
+        .modal-body h2:first-child {
+            margin-top: 0;
+        }
+        
+        .modal-body p {
+            margin-bottom: 15px;
+        }
+        
+        .modal-body .section {
+            margin-bottom: 30px;
+        }
+        
+        .modal-body .highlight {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 15px;
+            border-left: 3px solid #00ffff;
+            border-radius: 0 5px 5px 0;
+            margin: 20px 0;
+        }
+        
+        .modal-footer {
+            padding: 20px;
+            border-top: 2px solid #00ffff;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            position: sticky;
+            bottom: 0;
+            background: #111;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: #00ffff;
+            color: #000;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #00cccc;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #00ffff;
+            border: 1px solid #00ffff;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        .glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 255, 0) 70%);
+            filter: blur(30px);
+            z-index: -1;
+        }
+        
+        .glow-1 {
+            top: 10%;
+            left: 5%;
+        }
+        
+        .glow-2 {
+            bottom: 10%;
+            right: 5%;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .modal-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    
+    <div class="container">
+        <div class="logo">CYBER<span>SECURE</span></div>
+        <h1>Terms & Policy Modal</h1>
+        <p class="subtitle">Click the button below to view our terms and policies in a modern modal dialog</p>
+        
+        <button class="modal-btn" onclick="openModal()">
+            <i class="fas fa-file-contract"></i> View Terms & Policies
+        </button>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-lock"></i>
+                <h3>Privacy Protection</h3>
+                <p>Your data is securely protected with industry-standard encryption</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Security First</h3>
+                <p>We prioritize the security of your information above all else</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-user-check"></i>
+                <h3>User Consent</h3>
+                <p>We always ask for your permission before collecting any data</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Terms Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Terms & Policies</h3>
+                <button class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section class="section">
+                    <h2>Terms and Conditions</h2>
+                    <p>By accessing this website, you are agreeing to be bound by these website Terms and Conditions, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.</p>
+                    
+                    <div class="highlight">
+                        <p><strong>Important:</strong> If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
+                    </div>
+                    
+                    <h3>Use License</h3>
+                    <p>Permission is granted to temporarily download one copy of the materials (information or software) on our website for personal, non-commercial transitory viewing only.</p>
+                    
+                    <h3>Account Creation</h3>
+                    <p>When you create an account with us, you must provide accurate and complete information. You are solely responsible for the activity that occurs on your account.</p>
+                </section>
+                
+                <section class="section">
+                    <h2>Privacy Policy</h2>
+                    <p>Your privacy is important to us. It is our policy to respect your privacy regarding any information we may collect from you across our website.</p>
+                    
+                    <h3>Information We Collect</h3>
+                    <p>We only collect information about you if we have a reason to do so — for example, to provide our services, to communicate with you, or to make our services better.</p>
+                    
+                    <h3>How We Use Your Information</h3>
+                    <p>We use the information we collect in various ways, including to:</p>
+                    <ul>
+                        <li>Provide, operate, and maintain our services</li>
+                        <li>Improve, personalize, and expand our services</li>
+                        <li>Understand and analyze how you use our services</li>
+                        <li>Develop new products, services, features, and functionality</li>
+                    </ul>
+                </section>
+                
+                <section class="section">
+                    <h2>Cookie Policy</h2>
+                    <p>We use cookies and similar tracking technologies to track the activity on our service and hold certain information.</p>
+                    
+                    <h3>Types of Cookies We Use</h3>
+                    <p>We use both session and persistent cookies for the purposes set out below:</p>
+                    <ul>
+                        <li><strong>Essential Cookies:</strong> Necessary for providing you with services available through our website.</li>
+                        <li><strong>Functionality Cookies:</strong> Allow us to remember choices you make when you use our website.</li>
+                        <li><strong>Analytical Cookies:</strong> Allow us to understand how visitors interact with our website.</li>
+                    </ul>
+                </section>
+                
+                <section class="section">
+                    <h2>Limitation of Liability</h2>
+                    <p>In no event shall we, nor our directors, employees, agents, partners, suppliers, or content providers, be liable for any indirect, incidental, special, consequential or punitive damages.</p>
+                    
+                    <div class="highlight">
+                        <p><strong>Note:</strong> This limitation of liability applies whether the alleged liability is based on contract, tort, negligence, strict liability, or any other basis.</p>
+                    </div>
+                </section>
+                
+                <section class="section">
+                    <h2>Governing Law</h2>
+                    <p>These Terms shall be governed and construed in accordance with the laws of the State of California, United States, without regard to its conflict of law provisions.</p>
+                    
+                    <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.</p>
+                </section>
+                
+                <section class="section">
+                    <h2>Changes to Our Terms and Policies</h2>
+                    <p>We may update our Terms and Policies from time to time. We will notify you of any changes by posting the new Terms and Policies on this page.</p>
+                    
+                    <p>You are advised to review this Terms and Policies periodically for any changes. Changes to this Terms and Policies are effective when they are posted on this page.</p>
+                </section>
+                
+                <section class="section">
+                    <h2>Contact Information</h2>
+                    <p>If you have any questions about these Terms and Policies, please contact us:</p>
+                    
+                    <ul>
+                        <li>By email: legal@cybersecure.com</li>
+                        <li>By visiting this page on our website: cybersecure.com/contact</li>
+                        <li>By phone: +1 (555) 123-4567</li>
+                        <li>By mail: 123 Tech Street, San Francisco, CA 94103</li>
+                    </ul>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                <button class="btn btn-primary" onclick="acceptTerms()">I Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functions
+        function openModal() {
+            document.getElementById('termsModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('termsModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function acceptTerms() {
+            alert('Thank you for accepting our Terms and Policies!');
+            closeModal();
+        }
+        
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+            }
+        }
+        
+        // Close modal with ESC key
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.keyCode === 27) {
+                closeModal();
+            }
+        };
+        
+        // Add subtle animation to page elements on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.modal-btn');
+            const features = document.querySelectorAll('.feature');
+            
+            buttons.forEach((btn, index) => {
+                btn.style.opacity = '0';
+                btn.style.transform = 'translateY(20px)';
+                btn.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    btn.style.opacity = '1';
+                    btn.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+            
+            features.forEach((feature, index) => {
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateY(20px)';
+                feature.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    feature.style.opacity = '1';
+                    feature.style.transform = 'translateY(0)';
+                }, 300 + (index * 200));
+            });
+        });
+    </script>
+</body>
+</html>

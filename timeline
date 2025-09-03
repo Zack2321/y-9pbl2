@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cybersecurity News Timeline</title>
+  <link rel="stylesheet" href="new2.css" />
+</head>
+<body>
+  <h1>News for Cybersecurity</h1>
+
+  <div class="timeline-container">
+    <div class="timeline-line"></div>
+
+    <div class="timeline-box left hidden">
+      <h3>FEMA IT Breach</h3>
+      <p><strong>Aug 29, 2025</strong></p>
+      <p>U.S. Homeland Security Secretary Kristi Noem announced a FEMA IT breach. Around two dozen employees were fired. No U.S. citizens were directly affected, and no sensitive data was taken.</p>
+    </div>
+
+    <div class="timeline-box right hidden">
+      <h3>Malicious npm Package</h3>
+      <p><strong>Apr 2025</strong></p>
+      <p>Researchers found a fake npm package <strong>nodejs-smtp</strong> targeting crypto wallets like Atomic and Exodus. It was downloaded 347 times before removal.</p>
+    </div>
+
+    <div class="timeline-box left hidden">
+      <h3>Executive Cyber Course</h3>
+      <p><strong>2025</strong></p>
+      <p>A new program with Dr. Gerald Auger helps CISOs communicate risk effectively in boardrooms, boosting influence and investment in cybersecurity.</p>
+    </div>
+
+    <div class="timeline-box right hidden">
+      <h3>Small Weakness Chains</h3>
+      <p><strong>2025</strong></p>
+      <p>Experts warn cyberattacks often exploit chains of small flaws—like stolen credentials and outdated software—that together create major breaches.</p>
+    </div>
+
+    <div class="timeline-box left hidden">
+      <h3>SentinelOne Demand</h3>
+      <p><strong>2025</strong></p>
+      <p>SentinelOne sees rising AI-related threats. AI adoption expands attack surfaces, AI-powered attacks grow, and regulations tighten, fueling demand.</p>
+    </div>
+
+    <div class="timeline-box right hidden">
+      <h3>AI Boosting SOC</h3>
+      <p><strong>2025</strong></p>
+      <p>AI investments strengthen defenses by automating SOC processes, detecting threats earlier, and prioritizing high-risk issues for faster response.</p>
+    </div>
+
+    <button class="highlight-button">Cybersecurity Highlights 2025</button>
+  </div>
+
+  <!-- JavaScript for animation -->
+  <script>
+    const boxes = document.querySelectorAll('.timeline-box');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    boxes.forEach(box => {
+      observer.observe(box);
+    });
+  </script>
+</body>
+</html>

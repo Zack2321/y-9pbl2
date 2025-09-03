@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ASH Cybersecurity</title>
+      <link rel="icon" href="ASH_LOGO.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600&display=swap');
+    :root {
+      --neon-cyan: #0ff;
+      --neon-pink: #f0f;
+      --neon-purple: #9d00ff;
+      --deep-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+      --text-glow: 0 0 10px #0ff;
+      --pink-glow: 0 0 10px rgba(255, 0, 255, 0.7);
+    }
+    body {
+      font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: white;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.05) 0%, transparent 20%);
+      position: relative;
+    }
+    
+        .navbar {
+            background: rgba(0, 0, 0, 0.9) !important;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            z-index: 1000;
+            padding: 0.3rem 0;
+            min-height: 60px;
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1.6rem;
+            color: var(--neon-cyan) !important;
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 255, 255, 0.5);
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+            position: relative;
+            padding: 0;
+            margin-right: 35px;
+            margin-left: 0;
+            white-space: nowrap;
+        }
+        
+        .navbar-brand:hover {
+            text-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.7);
+        }
+        
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .nav-link {
+            color: #fff !important;
+            margin: 0 6px;
+            position: relative;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 6px 4px !important;
+            white-space: nowrap;
+        }
+        
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            transition: 0.4s ease;
+            box-shadow: 0 0 8px var(--neon-cyan), 0 0 8px var(--neon-pink);
+            border-radius: 2px;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--neon-cyan) !important;
+            text-shadow: var(--text-glow);
+        }
+        
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        
+        .nav-item {
+            margin: 0 3px;
+        }
+    .btn-neon {
+      border: 2px solid var(--neon-cyan);
+      background-color: transparent;
+      color: var(--neon-cyan);
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1.5px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+    }
+    .btn-neon:hover {
+      background-color: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 30px var(--neon-cyan), 0 0 60px rgba(0, 255, 255, 0.6);
+      transform: translateY(-3px);
+    }
+    .btn-neon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+      transition: 0.6s;
+    }
+    .btn-neon:hover::before {
+      left: 100%;
+    }
+    
+    .search-form {
+      position: relative;
+      margin-right: 15px;
+    }
+    .search-input {
+      background: rgba(0, 20, 30, 0.7);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 8px 15px;
+      padding-right: 40px;
+      color: white;
+      width: 250px;
+      transition: all 0.3s ease;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      width: 300px;
+    }
+    .search-btn {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--neon-cyan);
+      cursor: pointer;
+    }
+    
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 20, 30, 0.95);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+    .search-result-item {
+      padding: 10px 15px;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .search-result-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+    
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 255, 255, 0.1)  0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+      z-index: -1;
+    }
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.8rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0, 255, 255, 0.6);
+      margin-bottom: 1.5rem;
+      letter-spacing: 3px;
+      line-height: 1.2;
+      animation: textGlow 2s infinite alternate;
+    }
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px rgba(0, 255, 255, 0.5); }
+      100% { text-shadow: 0 0 20px var(--neon-cyan), 0 0 40px rgba(0, 255, 255, 0.8); }
+    }
+    .hero-subtitle {
+      font-size: 1.6rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    .cyber-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 1;
+      opacity: 0.7;
+    }
+    
+    .security-tips {
+      padding: 6rem 0;
+      background: rgba(0, 10, 20, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+    .security-tips::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(0,255,255,0.02)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+      background-size: 50px 50px;
+      opacity: 0.3;
+      z-index: 0;
+    }
+    .tip-card {
+      background: rgba(15, 25, 35, 0.8);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 15px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      transition: all 0.4s ease;
+      box-shadow:  0 8px 20px rgba(0, 0, 0, 0.4);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .tip-card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
+      z-index: -1;
+      border-radius: 16px;
+      opacity: 0;
+      transition: 0.5s;
+    }
+    .tip-card:hover::before {
+      opacity: 1;
+      filter: blur(5px);
+    }
+    .tip-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+      border-color: var(--neon-cyan);
+    }
+    .tip-icon {
+      font-size: 3rem;
+      color: var(--neon-cyan);
+      margin-bottom: 1.5rem;
+      text-shadow: var(--text-glow);
+      transition: 0.3s;
+    }
+    .tip-card:hover .tip-icon {
+      transform: scale(1.1);
+      color: var(--neon-pink);
+      text-shadow: var(--pink-glow);
+    }
+    .tip-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      position: relative;
+      display: inline-block;
+    }
+    .tip-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--neon-cyan);
+      transition: 0.4s;
+    }
+    .tip-card:hover .tip-title::after {
+      width: 100%;
+      background: var(--neon-pink);
+    }
+    .tip-card p {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .antivirus-list {
+      list-style-type: none;
+      padding: 0;
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
+      column-gap: 2rem;
+    }
+    .antivirus-list li {
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 2rem;
+      transition: 0.3s;
+    }
+    .antivirus-list li:hover {
+      color: var(--neon-cyan);
+      transform: translateX(5px);
+    }
+    .antivirus-list li::before {
+      content: "▹";
+      color: var(--neon-cyan);
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+    .antivirus-list li:hover::before {
+      color: var(--neon-pink);
+      transform: scale(1.3);
+    }
+    
+    .about-section {
+      padding: 6rem 0;
+      background: rgba(10, 0, 20, 0.8);
+      position: relative;
+    }
+    .about-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      box-shadow: 0 0 20px var(--neon-cyan);
+      border-radius: 2px;
+    }
+    .feature-img {
+      border-radius: 15px;
+      border: 2px solid rgba(0, 255, 255, 0.4);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      max-width: 100%;
+      height: auto;
+      transition: 0.5s;
+      position: relative;
+      z-index: 1;
+    }
+    .feature-img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+      border-color: var(--neon-pink);
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 15px #0ff;
+      margin-bottom: 3rem;
+      position: relative;
+      display: inline-block;
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+      box-shadow: 0 0 15px var(--neon-cyan);
+      border-radius: 2px;
+    }
+    .content-block {
+      margin-bottom: 4rem;
+    }
+    
+    .cyber-pulse {
+      animation: pulse 3s infinite alternate;
+      position: relative;
+    }
+    @keyframes pulse {
+      0% { 
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        transform: scale(1);
+      }
+      100% { 
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.9), 0 0 60px rgba(0, 255, 255, 0.3);
+        transform: scale(1.02);
+      }
+    }
+    
+    .stat-card {
+      background: rgba(20, 30, 40, 0.8);
+      border-radius: 15px;
+      padding: 2.5rem;
+      text-align: center;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    .stat-card:hover::before {
+      transform: scaleX(1);
+    }
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 255, 255, 0.3);
+    }
+    .stat-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      color: var(--neon-cyan);
+      margin-bottom: 0.5rem;
+      text-shadow: var(--text-glow);
+    }
+    .stat-label {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      letter-spacing: 1px;
+    }
+
+    .modal-content {
+      background-color: rgba(10, 20, 30, 0.95);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      color: white;
+    }
+    .modal-header {
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+    }
+    .modal-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px var(--neon-cyan);
+    }
+    .btn-close {
+      filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);
+    }
+    .form-control {
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      color: white;
+    }
+    .form-control:focus {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      color: white;
+    }
+    .form-label {
+      color: var(--neon-cyan);
+    }
+    .login-error, .register-error, .register-success {
+      color: #ff6b6b;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+    .register-success {
+      color: var(--neon-cyan);
+    }
+    .is-invalid {
+      border-color: #ff6b6b !important;
+      box-shadow: 0 0 10px rgba(255, 107, 107, 0.5) !important;
+    }
+    .invalid-feedback {
+      color: #ff6b6b;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+    
+    .dropdown-menu {
+      background-color: rgba(0, 20, 30, 0.95);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+    .dropdown-item {
+      color: white;
+      transition: all 0.3s;
+    }
+    .dropdown-item:hover {
+      background-color: rgba(0, 255, 255, 0.2);
+      color: var(--neon-cyan);
+    }
+    .dropdown-divider {
+      border-color: rgba(0, 255, 255, 0.2);
+    }
+    .user-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--neon-purple);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
+      font-weight: bold;
+    }
+    
+    @media (max-width: 992px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+      .hero-subtitle {
+        font-size: 1.3rem;
+      }
+      .section-title {
+        font-size: 2.2rem;
+      }
+      .search-input {
+        width: 180px;
+      }
+      .search-input:focus {
+        width: 220px;
+      }
+    }
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .antivirus-list {
+        columns: 1;
+        -webkit-columns: 1;
+        -moz-columns: 1;
+      }
+      .tip-card {
+        padding: 1.5rem;
+      }
+      .search-form {
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
+      }
+      .search-input {
+        width: 100%;
+      }
+      .search-input:focus {
+        width: 100%;
+      }
+    }
+
+footer .container-fluid {
+  background-color: #060607;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.footer-col {
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col h4 {
+  color: white;
+  margin-bottom: 25px;
+  font-size: 22px;
+  position: relative;
+  font-family: 'Ubuntu', sans-serif;
+  display: inline-block;
+}
+
+.footer-col h4::before {
+  content: '';
+  width: 70px;
+  height: 2px;
+  position: absolute;
+  background-color: #2a5da5;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer-col ul li {
+  padding: 10px 0;
+}
+
+.footer-col ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+.footer-col ul li a:hover {
+  opacity: 1;
+  color: var(--neon-cyan);
+}
+
+.footer-hr {
+  width: 80%;
+  margin: 20px auto;
+  border-top: 2px solid #2a5da5;
+  opacity: 0.6;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.social-icons a {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+.fa-facebook {
+  background: #3b5998;
+}
+
+.fa-youtube {
+  background: #ff0000;
+}
+
+.fa-google {
+  background: #db4a39;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.col {
+  color: white;
+  margin-top: 10px;
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .footer-col {
+    width: 30%;
+    max-width: 250px;
+  }
+  
+  .footer-row {
+    justify-content: space-around;
+  }
+}
+    .col{
+      color: white;
+    }
+    
+    @media (min-width: 768px) {
+      .footer-col {
+        width: 30%;
+      }
+    }
+
+.security-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    padding: 25px;
+    margin: 25px 50px; /* Added left and right margin */
+    margin-bottom: 25px;
+}
+
+.faq-header {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.accordion-button {
+    background-color: #2d2d2d;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #3d3d3d;
+    color: var(--primary);
+}
+
+.accordion-body {
+    background-color: #2d2d2d;
+    color: var(--text);
+    font-size: 0.85rem;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.accordion-item {
+    border: 1px solid #444;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .security-card {
+        margin: 15px 20px; /* Reduced margins for mobile */
+        padding: 15px;
+    }
+    
+    .accordion-body {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+        
+        .faq-header {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+                :root {
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --primary: #0d6efd;
+            --danger: #dc3545;
+            --success: #198754;
+            --warning: #ffc107;
+            --text: #f8f9fa;
+            --muted: #6c757d;
+        }
+            .security-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+
+            .terms-modal .modal-dialog {
+      max-width: 800px;
+    }
+    
+    .terms-modal .modal-content {
+      max-height: 80vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .terms-modal .modal-body {
+      overflow-y: auto;
+      padding: 20px;
+    }
+    
+    .terms-section {
+      margin-bottom: 25px;
+    }
+    
+    .terms-section h3 {
+      color: var(--neon-cyan);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .terms-highlight {
+      background: rgba(0, 255, 255, 0.1);
+      padding: 15px;
+      border-left: 3px solid var(--neon-cyan);
+      border-radius: 0 5px 5px 0;
+      margin: 15px 0;
+    }
+    
+    .terms-list {
+      padding-left: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .terms-list li {
+      margin-bottom: 8px;
+    }
+       .gallery {
+        margin-top: 20px;
+      }
+      .panel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 18px;
+        text-align: center;
+        padding: 20px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 15px;
+        transition: flex 0.6s ease-in;
+        cursor: pointer;
+      }
+      .panel h3 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 1px 1px 3px black;
+      }
+      .panel p {
+        font-size: 14px;
+        background: rgba(0,0,0,0.5);
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .flex {
+        display: flex;
+        gap: 10px;
+      }
+      .panel {
+        flex: 1;
+      }
+      .panel.active {
+        flex: 5;
+      }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="ASH_LOGO.png" width="40px"></i>ASH</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#cyberNavbar" aria-controls="cyberNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="background-color:#0ff;"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="cyberNavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <a class="nav-link" href="mcafee.html" >
+            AV softwares
+          </a>
+        <li class="nav-item"><a class="nav-link" href="about-us2 (1).html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact1 1.html">Contact Us</a></li>
+      </ul>
+      
+      <form class="search-form d-flex">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search...">
+        <button type="button" class="search-btn" id="searchButton">
+          <i class="bi bi-search"></i>
+        </button>
+        <div class="search-results" id="searchResults"></div>
+      </form>
+      
+      <div id="authButtons">
+        <button class="btn btn-neon" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="bi bi-shield-check me-2"></i>Sign in</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">SECURE LOGIN</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" required>
+            <div class="invalid-feedback">Please enter a valid username (min 4 characters)</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required>
+            <div class="invalid-feedback">Password must be at least 6 characters</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="remember Me">Remember me</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Login</button>
+          </div>
+          <div id="loginError" class="login-error">
+            Invalid credentials. Please try again.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">New user? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Register here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">SECURE REGISTRATION</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="registerForm">
+          <div class="mb-3">
+            <label for="regUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="regUsername" required>
+            <div class="invalid-feedback">Username must be 4-20 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" required>
+            <div class="invalid-feedback">Please enter a valid email</div>
+          </div>
+          <div class="mb-3">
+            <label for="regPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="regPassword" required>
+            <div class="invalid-feedback">Password must be at least 8 characters</div>
+          </div>
+          <div class="mb-3">
+            <label for="regConfirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="regConfirmPassword" required>
+            <div class="invalid-feedback">Passwords must match</div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+            <label class="form-check-label" for="termsCheck">I agree to the <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Policy</a></label>
+            <div class="invalid-feedback">You must agree to the terms</div>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-neon">Register</button>
+          </div>
+          <div id="registerError" class="register-error">
+            Registration error. Please try again.
+          </div>
+          <div id="registerSuccess" class="register-success">
+            Registration successful! You can now login.
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <p class="text-center w-100">Already have an account? <a href="#" style="color: var(--neon-cyan);" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Login here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Terms Modal -->
+<div class="modal fade terms-modal" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Terms & Policies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="terms-section">
+          <h3>Terms and Conditions</h3>
+          <p>By accessing this website, you are agreeing to be bound by these website Terms and Conditions, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.</p>
+          
+          <div class="terms-highlight">
+            <p><strong>Important:</strong> If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
+          </div>
+        
+        <div class="terms-section">
+          <h3>Privacy Policy</h3>
+          <p>Your privacy is important to us. It is our policy to respect your privacy regarding any information we may collect from you across our website.</p>
+          
+          <h4>Information We Collect</h4>
+          <p>We only collect information about you if we have a reason to do so — for example, to provide our services, to communicate with you, or to make our services better.</p>
+          
+          <h4>How We Use Your Information</h4>
+          <p>We use the information we collect in various ways, including to:</p>
+          <ul class="terms-list">
+            <li>Provide, operate, and maintain our services</li>
+            <li>Improve, personalize, and expand our services</li>
+            <li>Understand and analyze how you use our services</li>
+            <li>Develop new products, services, features, and functionality</li>
+          </ul>
+        </div>
+        
+        
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="home" class="hero-section">
+  <div class="cyber-grid"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Cybersecurity </h1>
+    <p class="hero-subtitle">Learn how to safeguard your devices against hackers with cutting-edge cybersecurity solutions and comprehensive digital protection strategies for the modern age.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="#tips" class="btn btn-neon mb-2">Security Tips</a>
+      <a href="#antivirus" class="btn btn-neon mb-2">Top Antivirus</a>
+    </div>
+  </div>
+</section>
+   <div class="container text-center mt-4">
+      <h1>How Can We Stay Safe Online?</h1>
+      <p>Learn about common online risks and viruses to protect yourself with smart safety tips.</p>
+    </div>
+
+    <div class="gallery">
+      <div class="container-fluid flex">
+        <div class="panel active" style="background-image: url('https://images.pexels.com/photos/5380643/pexels-photo-5380643.jpeg')">
+          <h3>Trojan Virus</h3>
+          <p>Disguises as a useful program but steals your data or installs malware once opened.</p>
+        </div>
+        <div class="panel" style="background-image: url('https://images.pexels.com/photos/5474295/pexels-photo-5474295.jpeg')">
+          <h3>Ransomware</h3>
+          <p>Locks your files and demands payment to restore access. Never pay—use backups instead.</p>
+        </div>
+        <div class="panel" style="background-image: url('https://images.pexels.com/photos/5380640/pexels-photo-5380640.jpeg')">
+          <h3>Phishing Attacks</h3>
+          <p>Fake emails or websites trick you into giving passwords or bank details.</p>
+        </div>
+        <div class="panel" style="background-image: url('https://images.pexels.com/photos/5380599/pexels-photo-5380599.jpeg')">
+          <h3>Spyware</h3>
+          <p>Secretly monitors your activity and collects personal information without consent.</p>
+        </div>
+        <div class="panel" style="background-image: url('https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg')">
+          <h3>Worms</h3>
+          <p>Self-replicating programs that spread across networks, slowing or damaging systems.</p>
+        </div>
+      </div>
+
+<section id="tips" class="security-tips">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">How To Prevent Hackers From Accessing Your Device</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="tip-card">
+          <div class="tip-icon"><i class="bi bi-key-fill"></i></div>
+          <h3 class="tip-title">Strong Passwords</h3>
+          <p>In today's digital landscape, strong passwords are your first line of defense against unauthorized access. Cybersecurity experts recommend passwords with at least 12 characters that combine uppercase and lowercase letters, numbers, and special symbols.</p>
+          <p>Avoid using dictionary words, personal information like birthdays, or simple patterns. Each password should be unique to its account to prevent credential stuffing attacks where hackers try known passwords across multiple sites.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="tip-card">
+          <div class="tip-icon"><i class="bi bi-arrow-repeat"></i></div>
+          <h3 class="tip-title">Regular Updates</h3>
+          <p>Software vulnerabilities are discovered daily, and updates often contain critical security patches. Enable automatic updates for your operating system, web browsers, and all installed applications to ensure you're protected against the latest threats.</p>
+          <p>Outdated software is one of the most common attack vectors. Hackers exploit known vulnerabilities that have already been fixed in newer versions. This includes not just your computer's OS, but also smartphone apps, IoT devices, and even your router's firmware.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="tip-card">
+          <div class="tip-icon"><i class="bi bi-shield-check"></i></div>
+          <h3 class="tip-title">Antivirus Protection</h3>
+          <p>Modern antivirus solutions offer much more than just virus scanning. They provide real-time protection against zero-day exploits, ransomware, spyware, and phishing attempts. Look for solutions with behavior-based detection that can identify new, previously unknown threats.</p>
+          <p>Premium antivirus packages often include additional features like firewalls, secure browsing tools, password managers, and VPN services. These integrated solutions provide comprehensive protection across all aspects of your digital life.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cyber-threats" class="security-tips">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Understanding Cyber Threats</h2>
+    <div class="row align-items-center content-block">
+      <div class="col-md-6">
+        <h3 class="tip-title">The Evolving Threat Landscape</h3>
+        <p>Cyber threats have become increasingly sophisticated, targeting individuals, businesses, and governments alike. Understanding these threats is the first step in protecting yourself against them.</p>
+        <p>Modern cybercriminals employ advanced techniques like artificial intelligence to automate attacks, polymorphic malware that changes its code to evade detection, and social engineering tactics that manipulate human psychology.</p>
+        <p>Some of the most dangerous current threats include:</p>
+        <ul class="antivirus-list">
+          <li><strong>Advanced Persistent Threats (APTs):</strong> Long-term targeted attacks often sponsored by nation-states</li>
+          <li><strong>Fileless Malware:</strong> Attacks that operate in memory without leaving files on disk</li>
+          <li><strong>Supply Chain Attacks:</strong> Compromising software vendors to distribute malware</li>
+          <li><strong>Zero-Day Exploits:</strong> Attacks targeting vulnerabilities before patches are available</li>
+          <li><strong>AI-Powered Attacks:</strong> Using machine learning to create more effective phishing</li>
+          <li><strong>Cryptojacking:</strong> Unauthorized use of devices to mine cryptocurrency</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <img src="cybersecurity.H.jpg" width="800px" alt="Cyber Threats" class="feature-img cyber-pulse">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="security-tips">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Our Mission</h2>
+    <div class="row align-items-center content-block">
+      <div class="col-md-6">
+        <img src="cybersec.jpeg" style="width: 500px;" alt="ASH Cybersecurity" class="feature-img cyber-pulse">
+      </div>
+      <div class="col-md-6">
+         <h3 class="tip-title">Our Mission at ASH</h3>
+        <p>ASH is dedicated to providing the latest information and tools to protect individuals and businesses from cyber threats. Our team of security experts continuously monitors the threat landscape to bring you up-to-date protection strategies.</p>
+        <p>We believe cybersecurity should be accessible to everyone, not just IT professionals. That's why we provide clear, actionable advice and recommend trusted security solutions to keep your digital life safe. Our content is regularly reviewed by certified cybersecurity professionals to ensure accuracy and relevance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about-section">
+  <div class="container">
+    <h2 class="text-center mb-5 section-title">Top Antivirus Software</h2>
+    
+    <div class="row align-items-center content-block">
+      <div class=" col-md-6">
+        <h3 class="tip-title" id="antivirus">Protection Solutions</h3>
+        <p>The antivirus market has evolved significantly from simple virus scanners to complete endpoint protection platforms. Modern solutions incorporate machine learning to detect never-before-seen malware, behavioral analysis to stop zero-day attacks, and cloud-assisted scanning for real-time threat intelligence.</p>
+        <p>When evaluating antivirus software, consider factors beyond detection rates. System impact is crucial - some solutions slow down computers noticeably during scans. Look for products with minimal performance impact that offer silent/gaming modes when you need full system resources.</p>
+        <p>Our recommended antivirus solutions include:</p>
+        <ul class="antivirus-list">
+          <li>Bitdefender - Comprehensive protection with minimal system impact</li>
+          <li>Kaspersky - Advanced threat detection with excellent malware removal</li>
+          <li>Norton - Feature-rich with strong phishing protection</li>
+          <li>McAfee - Good for multi-device households</li>
+          <li>Avast - Free version available with solid protection</li>
+          <li>ESET - Lightweight with excellent detection rates</li>
+          <li>Trend Micro - Strong ransomware protection</li>
+          <li>Sophos - Excellent for business and home use</li>
+          <li>AVG - Good free option with essential protection</li>
+          <li>Malwarebytes - Specializes in malware removal</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <img src="Cybersecurity-solutions.jpeg" alt="Antivirus Solutions" class="feature-img cyber-pulse">
+      </div>
+    </div>
+    
+    <div class="row align-items-center content-block mt-5">
+      <div class="col-md-6">
+        <img src="cyber.png" alt="Cyber Defense" class="feature-img">
+      </div>
+      <div class="col-md-6">
+        <h3 class="tip-title">Join Our Community</h3>
+        <p>Stay informed about the latest threats and protection strategies by joining our community. We offer regular security bulletins, webinars with cybersecurity experts, and early access to new protection tools.</p>
+        <p>Members of our community gain access to exclusive resources including security checklists, incident response templates, and discounts on premium security software. Together, we can build a safer digital world.</p>
+        <button class="btn btn-neon mt-3" data-bs-toggle="modal" data-bs-target="#loginModal">Join Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<h1 style="text-align: center;">FAQ</h1>
+         <!-- FAQ Section -->
+        <div class="security-card">
+            <h3 class="faq-header">Frequently Asked Questions</h3>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                            How accurate is this device scanner?
+                        </button>
+                    </h2>
+                    <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>This is a simulation that demonstrates how a Gmail device scanner would work. In a real implementation, it would connect to Google's security API to retrieve actual device information.</p>
+                            <p>The results shown are based on patterns and common device types but do not represent your actual account status.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                            What should I do if I find an unrecognized device?
+                        </button>
+                    </h2>
+                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>If you find an unrecognized device in a real security check, you should immediately sign out of that device and change your password.</p>
+                            <p>Enable two-factor authentication for added security and review your account recovery options to ensure they are up to date.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                            How often should I check my active devices?
+                        </button>
+                    </h2>
+                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>It's good practice to check your active devices at least once a month, or whenever you receive a security alert from your email provider.</p>
+                            <p>You should also check after using public computers or networks, or if you suspect any unusual activity in your account.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                            Can I remotely sign out of devices?
+                        </button>
+                    </h2>
+                    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>Yes, most email providers including Gmail allow you to remotely sign out of devices from your security settings.</p>
+                            <p>This is particularly useful if you've lost a device or suspect unauthorized access to your account.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading5">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                            What information can a device scanner show?
+                        </button>
+                    </h2>
+                    <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            <p>A device scanner typically shows the type of device, browser information, approximate location, and the last time the device was active.</p>
+                            <p>This helps you identify any suspicious activity and take appropriate security measures.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<footer id="contact">
+  <div class="container-fluid">
+    <div class="footer-row">
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Homepage</a></li>
+          <li><a href="about-us2 (1).html">About Us</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>News</h4>
+        <ul>
+          <li><a href="#tips">Security Tips</a></li>
+          <li><a href="cyberaware.html">Cyber Awareness</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#support">Support</a></li>
+          <li><a href="reference.html">Reference</a></li>
+          <li><a href="contact1 1.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-hr"/>
+    <div class="row text-center">
+      <div class="social-icons">
+  <a href="https://www.facebook.com/peoplentech/posts/-cybersecurity-tips-stay-safe-online-protect-yourself-from-cyber-threats-with-th/1233183008837988/?utm_source=chatgpt.com" target="_blank" class="fa fa-facebook"></a>
+  <a href="https://www.youtube.com/watch?v=X9Htg8V3eik&pp=ygWLAUhvdyBjYW4gd2UgcmFpc2UgYXdhcmVuZXNzIGFib3V0IG9ubGluZSByaXNrcyBhbmQgZGFuZ2VycyB0byBoZWxwIHBlb3BsZSBzdGF5IHNhZmUgb25saW5lIGJ5IHByb3ZpZGluZyB1c2VmdWwgc2FmZXR5IHRpcHMgYW5kIGluZm9ybWF0aW9uPyA%3D" target="_blank" class="fa fa-youtube"></a>
+  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0747563215000606" target="_blank" class="fa fa-google"></a>
+  <a href="https://x.com/search?q=%23Cybersecurity&src=hashtag_click&utm_source=chatgpt.com" target="_blank" class="fa fa-twitter"></a>
+</div>
+      <div class="col">
+        <p>&copy; Copyright 2025-2026. All rights reserved. Developed by ASH.</p>
+      </div>
+    </div>  
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+        const panels = document.querySelectorAll('.panel');
+
+      panels.forEach(panel => {
+        panel.addEventListener('click', () => {
+          panels.forEach(p => p.classList.remove('active'));
+          panel.classList.add('active');
+        });
+      });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const authButtons = document.getElementById('authButtons');
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    
+    if (loggedInUser) {
+      const user = JSON.parse(loggedInUser);
+      showUserProfile(user.username);
+    }
+    
+    function showUserProfile(username) {
+      const initials = username.substring(0, 2).toUpperCase();
+      authButtons.innerHTML = `
+        <div class="dropdown">
+          <button class="btn btn-neon dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="user-avatar">${initials}</span>
+            ${username}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+          </ul>
+        </div>
+      `;
+      
+      document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('loggedInUser');
+        location.reload();
+      });
+    }
+
+    const loginForm = document.getElementById('loginForm');
+    const loginError = document.getElementById('loginError');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    
+    function validateUsername(username) {
+      return username.length >= 4;
+    }
+    
+    function validatePassword(password) {
+      return password.length >= 6;
+    }
+    
+    function showError(input, isValid) {
+      if (!isValid) {
+        input.classList.add('is-invalid');
+      } else {
+        input.classList.remove('is-invalid');
+      }
+    }
+    
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+      
+      const isUsernameValid = validateUsername(username);
+      const isPasswordValid = validatePassword(password);
+      
+      showError(usernameInput, isUsernameValid);
+      showError(passwordInput, isPasswordValid);
+      
+      if (isUsernameValid && isPasswordValid) {
+        loginError.style.display = 'none';
+        
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(u => u.username === username && u.password === password);
+        
+        if (user) {
+          localStorage.setItem('loggedInUser', JSON.stringify(user));
+          
+          const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+          modal.hide();
+          
+          showUserProfile(user.username);
+        } else {
+          loginError.style.display = 'block';
+        }
+      }
+    });
+    
+    usernameInput.addEventListener('input', function() {
+      showError(this, validateUsername(this.value.trim()));
+    });
+    
+    passwordInput.addEventListener('input', function() {
+      showError(this, validatePassword(this.value.trim()));
+    });
+
+    const registerForm = document.getElementById('registerForm');
+    const regUsername = document.getElementById('regUsername');
+    const regEmail = document.getElementById('regEmail');
+    const regPassword = document.getElementById('regPassword');
+    const regConfirmPassword = document.getElementById('regConfirmPassword');
+    const termsCheck = document.getElementById('termsCheck');
+    const registerError = document.getElementById('registerError');
+    const registerSuccess = document.getElementById('registerSuccess');
+    
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+    
+    function validateRegisterForm() {
+      let isValid = true;
+      
+      const username = regUsername.value.trim();
+      if (username.length < 4 || username.length > 20) {
+        regUsername.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        regUsername.classList.remove('is-invalid');
+      }
+      
+      const email = regEmail.value.trim();
+      if (!validateEmail(email)) {
+        regEmail.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        regEmail.classList.remove('is-invalid');
+      }
+      
+      const password = regPassword.value;
+      if (password.length < 8) {
+        regPassword.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        regPassword.classList.remove('is-invalid');
+      }
+      
+      if (password !== regConfirmPassword.value) {
+        regConfirmPassword.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        regConfirmPassword.classList.remove('is-invalid');
+      }
+      
+      if (!termsCheck.checked) {
+        termsCheck.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        termsCheck.classList.remove('is-invalid');
+      }
+      
+      return isValid;
+    }
+    
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      registerError.style.display = 'none';
+      registerSuccess.style.display = 'none';
+      
+      if (validateRegisterForm()) {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        
+        const usernameExists = users.some(user => user.username === regUsername.value.trim());
+        const emailExists = users.some(user => user.email === regEmail.value.trim());
+        
+        if (usernameExists) {
+          registerError.textContent = 'Username already exists';
+          registerError.style.display = 'block';
+          regUsername.classList.add('is-invalid');
+          return;
+        }
+        
+        if (emailExists) {
+          registerError.textContent = 'Email already registered';
+          registerError.style.display = 'block';
+          regEmail.classList.add('is-invalid');
+          return;
+        }
+        
+        const newUser = {
+          username: regUsername.value.trim(),
+          email: regEmail.value.trim(),
+          password: regPassword.value
+        };
+        
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        
+        registerSuccess.style.display = 'block';
+        registerForm.reset();
+        
+        setTimeout(() => {
+          const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+          modal.hide();
+          
+          const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+          loginModal.show();
+        }, 2000);
+      } else {
+        registerError.style.display = 'block';
+      }
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const searchResults = document.getElementById('searchResults');
+    
+    const searchableContent = [
+      { id: 'home', title: 'Home', content: 'Main page with hero section and introduction to cybersecurity' },
+      { id: 'tips', title: 'Security Tips', content: 'Learn how to prevent hackers from accessing your device' },
+      { id: 'cyber-threats', title: 'Cyber Threats', content: 'Understanding the evolving threat landscape' },
+      { id: 'about', title: 'About Us', content: 'Our mission and top antivirus software recommendations' },
+      { id: 'antivirus', title: 'Antivirus Solutions', content: 'Protection solutions and recommended software' },
+      { id: 'contact', title: 'Contact Us', content: 'Get in touch with our team' }
+    ];
+    
+    function performSearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      searchResults.innerHTML = '';
+      
+      if (query.length < 2) {
+        searchResults.style.display = 'none';
+        return;
+      }
+      
+      const results = searchableContent.filter(item => 
+        item.title.toLowerCase().includes(query) || 
+        item.content.toLowerCase().includes(query)
+      );
+      
+      if (results.length > 0) {
+        results.forEach(result => {
+          const resultItem = document.createElement('div');
+          resultItem.className = 'search-result-item';
+          resultItem.innerHTML = `
+            <strong>${result.title}</strong>
+            <div>${result.content}</div>
+          `;
+          resultItem.addEventListener('click', () => {
+            window.location.hash = result.id;
+            searchResults.style.display = 'none';
+            searchInput.value = '';
+          });
+          searchResults.appendChild(resultItem);
+        });
+        searchResults.style.display = 'block';
+      } else {
+        const noResults = document.createElement('div');
+        noResults.className = 'search-result-item';
+        noResults.textContent = 'No results found';
+        searchResults.appendChild(noResults);
+        searchResults.style.display = 'block';
+      }
+    }
+    
+    searchInput.addEventListener('input', performSearch);
+    searchButton.addEventListener('click', performSearch);
+    
+    searchInput.addEventListener('keyup', function(e) {
+      if (e.key === 'Enter') {
+        performSearch();
+        e.preventDefault();
+      }
+    });
+    
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+      }
+    });
+    
+    const smoothScroll = function(targetId) {
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    };
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId !== '#') {
+          smoothScroll(targetId);
+        }
+      });
+    });
+    
+    if (window.location.hash) {
+      setTimeout(() => {
+        smoothScroll(window.location.hash);
+      }, 100);
+    }
+  });
+</script>
+</body>
+</html>
